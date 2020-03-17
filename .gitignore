@@ -1,0 +1,5 @@
+dataset/*
+!dataset/README.md
+
+.DS_Store
+ 
