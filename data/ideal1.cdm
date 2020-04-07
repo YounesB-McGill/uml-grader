@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="ASCII"?>
+<classdiagram:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classdiagram="http://cs.mcgill.ca/sel/cdm/1.0" name="Tc-models">
+  <classes xsi:type="classdiagram:Class" name="FantasyBasketball">
+    <associationEnds name="matches" assoc="//@associations.0" upperBound="-1" referenceType="Aggregation"/>
+    <associationEnds name="teams" assoc="//@associations.1" upperBound="-1" referenceType="Aggregation"/>
+    <associationEnds name="players" assoc="//@associations.2" upperBound="-1" referenceType="Aggregation"/>
+    <associationEnds name="virtualteams" assoc="//@associations.3" upperBound="-1" referenceType="Aggregation"/>
+  </classes>
+  <classes xsi:type="classdiagram:Class" name="Match">
+    <associationEnds name="myFantasyBasketball" navigable="false" assoc="//@associations.0" lowerBound="1"/>
+    <associationEnds name="homeTeam" assoc="//@associations.8"/>
+    <associationEnds name="awayTeam" assoc="//@associations.9"/>
+    <associationEnds name="playerStats" assoc="//@associations.10" upperBound="-1" referenceType="Aggregation"/>
+    <attributes name="season" type="//@types.4"/>
+    <attributes name="matchID" type="//@types.4"/>
+  </classes>
+  <classes xsi:type="classdiagram:Class" name="Team">
+    <associationEnds name="myFantasyBasketball" navigable="false" assoc="//@associations.1" lowerBound="1"/>
+    <associationEnds name="players" assoc="//@associations.7" upperBound="-1"/>
+    <associationEnds name="homeMatches" assoc="//@associations.8" upperBound="-1"/>
+    <associationEnds name="awayMatches" assoc="//@associations.9" upperBound="-1"/>
+    <attributes name="season" type="//@types.4"/>
+    <attributes name="name" type="//@types.6"/>
+  </classes>
+  <classes xsi:type="classdiagram:Class" name="PlayerStatistics">
+    <associationEnds name="myMatch" navigable="false" assoc="//@associations.10" lowerBound="1"/>
+    <associationEnds name="player" assoc="//@associations.11"/>
+    <associationEnds name="myVirtualScore" navigable="false" assoc="//@associations.12" lowerBound="1"/>
+    <attributes name="points" type="//@types.4"/>
+    <attributes name="assists" type="//@types.4"/>
+    <attributes name="rebounds" type="//@types.4"/>
+  </classes>
+  <classes xsi:type="classdiagram:Class" name="Player">
+    <associationEnds name="myFantasyBasketball" navigable="false" assoc="//@associations.2" lowerBound="1"/>
+    <associationEnds name="teamAsStarter" assoc="//@associations.5" upperBound="-1"/>
+    <associationEnds name="teamsOnBench" assoc="//@associations.6"/>
+    <associationEnds name="team" assoc="//@associations.7"/>
+    <associationEnds name="stats" assoc="//@associations.11" upperBound="-1"/>
+    <attributes name="firstName" type="//@types.6"/>
+    <attributes name="lastName" type="//@types.6"/>
+    <attributes name="licenseID" type="//@types.4"/>
+    <attributes name="salary" type="//@types.4"/>
+  </classes>
+  <classes xsi:type="classdiagram:Class" name="VirtualTeam">
+    <associationEnds name="myFantasyBasketball" navigable="false" assoc="//@associations.3" lowerBound="1"/>
+    <associationEnds name="virtualScores" assoc="//@associations.4" upperBound="-1" referenceType="Aggregation"/>
+    <associationEnds name="starterPlayers" assoc="//@associations.5" upperBound="5"/>
+    <associationEnds name="benchPlayers" assoc="//@associations.6" upperBound="7"/>
+    <attributes name="score" type="//@types.4"/>
+    <attributes name="ranking" type="//@types.4"/>
+    <attributes name="name" type="//@types.6"/>
+    <attributes name="budget" type="//@types.4"/>
+  </classes>
+  <classes xsi:type="classdiagram:Class" name="VirtualScore">
+    <associationEnds name="myVirtualTeam" navigable="false" assoc="//@associations.4" lowerBound="1"/>
+    <associationEnds name="statistics" assoc="//@associations.12"/>
+    <attributes name="playerScoreInMatch" type="//@types.4"/>
+  </classes>
+  <types xsi:type="classdiagram:CDVoid"/>
+  <types xsi:type="classdiagram:CDAny"/>
+  <types xsi:type="classdiagram:CDBoolean"/>
+  <types xsi:type="classdiagram:CDDouble"/>
+  <types xsi:type="classdiagram:CDInt"/>
+  <types xsi:type="classdiagram:CDLong"/>
+  <types xsi:type="classdiagram:CDString"/>
+  <types xsi:type="classdiagram:CDByte"/>
+  <types xsi:type="classdiagram:CDFloat"/>
+  <types xsi:type="classdiagram:CDChar"/>
+  <associations name="Match_FantasyBasketball" ends="//@classes.1/@associationEnds.0 //@classes.0/@associationEnds.0"/>
+  <associations name="FantasyBasketball_Team" ends="//@classes.0/@associationEnds.1 //@classes.2/@associationEnds.0"/>
+  <associations name="FantasyBasketball_Player" ends="//@classes.0/@associationEnds.2 //@classes.4/@associationEnds.0"/>
+  <associations name="FantasyBasketball_VirtualTeam" ends="//@classes.0/@associationEnds.3 //@classes.5/@associationEnds.0"/>
+  <associations name="VirtualTeam_VirtualScore" ends="//@classes.5/@associationEnds.1 //@classes.6/@associationEnds.0"/>
+  <associations name="Player_VirtualTeam" ends="//@classes.4/@associationEnds.1 //@classes.5/@associationEnds.2"/>
+  <associations name="VirtualTeam_Player" ends="//@classes.5/@associationEnds.3 //@classes.4/@associationEnds.2"/>
+  <associations name="Team_Player" ends="//@classes.2/@associationEnds.1 //@classes.4/@associationEnds.3"/>
+  <associations name="Match_Team" ends="//@classes.1/@associationEnds.1 //@classes.2/@associationEnds.2"/>
+  <associations name="Team_Match" ends="//@classes.2/@associationEnds.3 //@classes.1/@associationEnds.2"/>
+  <associations name="Match_PlayerStatistics" ends="//@classes.1/@associationEnds.3 //@classes.3/@associationEnds.0"/>
+  <associations name="PlayerStatistics_Player" ends="//@classes.3/@associationEnds.1 //@classes.4/@associationEnds.4"/>
+  <associations name="PlayerStatistics_VirtualScore" ends="//@classes.3/@associationEnds.2 //@classes.6/@associationEnds.1"/>
+  <layout>
+    <containers key="/">
+      <value key="//@classes.0">
+        <value x="668.4416" y="48.999725"/>
+      </value>
+      <value key="//@classes.1">
+        <value x="8.000122" y="205.08755"/>
+      </value>
+      <value key="//@classes.2">
+        <value x="423.50012" y="157.96127"/>
+      </value>
+      <value key="//@classes.3">
+        <value x="214.49994" y="517.9472"/>
+      </value>
+      <value key="//@classes.4">
+        <value x="689.4182" y="422.07367"/>
+      </value>
+      <value key="//@classes.5">
+        <value x="1073.9324" y="179.08759"/>
+      </value>
+      <value key="//@classes.6">
+        <value x="1040.4558" y="543.92755"/>
+      </value>
+    </containers>
+  </layout>
+</classdiagram:ClassDiagram>

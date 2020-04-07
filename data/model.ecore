@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="model" nsURI="ca.mcgill.ecse321.FBGS.model" nsPrefix="model">
+  <eClassifiers xsi:type="ecore:EDataType" name="int" instanceClassName="int" />
+  <eClassifiers xsi:type="ecore:EClass" name="FBGS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="competitions" upperBound="-1" eType="#//Competition" eOpposite="#//Competition/fBGS" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="users" upperBound="-1" eType="#//User" eOpposite="#//User/fBGS" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="players" upperBound="-1" eType="#//Player" eOpposite="#//Player/fBGS" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="virtualTeams" upperBound="-1" eType="#//VirtualTeam" eOpposite="#//VirtualTeam/fBGS" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="matchs" upperBound="-1" eType="#//Match" eOpposite="#//Match/fBGS" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Competition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ranking" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nbaSeason" eType="#//int" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fBGS" lowerBound="1" eType="#//FBGS" eOpposite="#//FBGS/competitions" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="virtualTeams" lowerBound="2" upperBound="-1" eType="#//VirtualTeam" eOpposite="#//VirtualTeam/competition" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VirtualTeam">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="budget" eType="#//int" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="score" eType="#//int" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lineup" upperBound="-1" eType="#//Player" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bench" upperBound="-1" eType="#//Player" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fBGS" lowerBound="1" eType="#//FBGS" eOpposite="#//FBGS/virtualTeams" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="competition" lowerBound="1" eType="#//Competition" eOpposite="#//Competition/virtualTeams" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="users" lowerBound="1" upperBound="-1" eType="#//User" eOpposite="#//User/virtualTeams" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="players" lowerBound="12" upperBound="12" eType="#//Player" eOpposite="#//Player/virtualTeams" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="matchs" upperBound="-1" eType="#//Match" eOpposite="#//Match/virtualTeams" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Player">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="licenseId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="salary" eType="#//int" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="realTeam" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="points" eType="#//int" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="assists" eType="#//int" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rebounds" eType="#//int" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="score" eType="#//int" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fBGS" lowerBound="1" eType="#//FBGS" eOpposite="#//FBGS/players" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="virtualTeams" upperBound="-1" eType="#//VirtualTeam" eOpposite="#//VirtualTeam/players" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="User">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fBGS" lowerBound="1" eType="#//FBGS" eOpposite="#//FBGS/users" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="virtualTeams" upperBound="-1" eType="#//VirtualTeam" eOpposite="#//VirtualTeam/users" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Match">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="winner" eType="#//VirtualTeam" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fBGS" lowerBound="1" eType="#//FBGS" eOpposite="#//FBGS/matchs" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="virtualTeams" lowerBound="2" upperBound="2" eType="#//VirtualTeam" eOpposite="#//VirtualTeam/matchs" />
+  </eClassifiers>
+</ecore:EPackage>
