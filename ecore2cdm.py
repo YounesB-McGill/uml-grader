@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import re
+import os
 from collections import OrderedDict
 from lxml import etree
 from typing import Dict, List
@@ -12,7 +13,15 @@ IN = "data/ideal.ecore"
 # map ecore to cdm types
 TYPES: Dict[str, str] = {
     "ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString": "//@types.6",
-    "#//int": "//@types.4"
+    "ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" : "//@types.4",
+    "#//int": "//@types.4",
+    "ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat": "//@types.8",
+    "#//Time": "//@types.1",
+    "#//Date": "//@types.1",
+    "#//boolean": "//@types.2",
+    "#//double": "//@types.3",
+    "#//float": "//@types.8",
+    "ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble": "//@types.3",
 }
 
 
@@ -59,6 +68,78 @@ def get_class_by_name(classes: List[Class], name: str) -> str:
         if c.name == name:
             return c
     print(f"WARNING: Class {name} not found.")
+
+
+def get_class_layouts(n: int) -> str:
+    a = [
+        """      <value key="//@classes.0">
+        <value x="668.4416" y="48.999725"/>
+      </value>""","""
+      <value key="//@classes.1">
+        <value x="8.000122" y="205.08755"/>
+      </value>""","""
+      <value key="//@classes.2">
+        <value x="423.50012" y="157.96127"/>
+      </value>""","""
+      <value key="//@classes.3">
+        <value x="214.49994" y="517.9472"/>
+      </value>""","""
+      <value key="//@classes.4">
+        <value x="689.4182" y="422.07367"/>
+      </value>""","""
+      <value key="//@classes.5">
+        <value x="1073.9324" y="179.08759"/>
+      </value>""","""
+      <value key="//@classes.6">
+        <value x="1040.4558" y="543.92755"/>
+      </value>""","""
+      <value key="//@classes.7">
+        <value x="208.000122" y="405.08755"/>
+      </value>""","""
+      <value key="//@classes.8">
+        <value x="623.50012" y="357.96127"/>
+      </value>""","""
+      <value key="//@classes.9">
+        <value x="414.49994" y="717.9472"/>
+      </value>""","""
+      <value key="//@classes.10">
+        <value x="889.4182" y="622.07367"/>
+      </value>""","""
+      <value key="//@classes.11">
+        <value x="1273.9324" y="379.08759"/>
+      </value>""","""
+      <value key="//@classes.12">
+        <value x="1240.4558" y="743.92755"/>
+      </value>""","""
+      <value key="//@classes.13">
+        <value x="14.49994" y="317.9472"/>
+      </value>""","""
+      <value key="//@classes.14">
+        <value x="489.4182" y="222.07367"/>
+      </value>""","""
+      <value key="//@classes.15">
+        <value x="1073.9324" y="179.08759"/>
+      </value>""","""
+      <value key="//@classes.16">
+        <value x="740.4558" y="243.92755"/>
+      </value>""","""
+      <value key="//@classes.17">
+        <value x="58.000122" y="5.08755"/>
+      </value>""","""
+      <value key="//@classes.18">
+        <value x="123.50012" y="57.96127"/>
+      </value>"""
+    ]
+
+    result = """  <layout>
+    <containers key="/">
+      """
+
+    for i in range(n):
+        result += a[i]
+
+    return result + """    </containers>
+  </layout>"""
 
 
 def ecore2cdm(ecore: str) -> str:
@@ -114,37 +195,77 @@ def ecore2cdm(ecore: str) -> str:
                         classes.append(class2)
 
                     assoc = make_association(class1, class2, assoc_name)
-                    print(class1, class2)
+                    #print(class1, class2)
                     class1.associations[f"{other_class}_{assoc_name}"] = assoc
                     class2.associations[f"{class_name}_{assoc_name}"] = assoc
                     associations.append(assoc)
 
 
-    print(classes, "\n", associations)
+    #print(classes, "\n", associations)
 
-    exit(0)
+    #exit(0)
 
-    cdm_class_nodes = []
-
+    cdm_class_nodes = {}
+    cdm_assoc_nodes = []
 
     # make classes with attributes
     for e in root:
         if "ecore:EClass" in e.attrib.values():
-            cdm_class_node = etree.Element("classes", xsitype="ecore:EClass", name=e.attrib["name"])
+            cdm_class_node = etree.Element("classes", xsitype="classdiagram:Class", name=e.attrib["name"])
+            clazz = get_class_by_name(classes, e.attrib["name"])
+            
+            i = 0
             for sf in e:
                 if "ecore:EAttribute" in sf.attrib.values():
                     cdm_attr_node = etree.SubElement(cdm_class_node, "attributes")
                     cdm_attr_node.set("name", sf.attrib["name"])
-                    cdm_attr_node.set("type", TYPES[sf.attrib["eType"]])
+                    cdm_attr_node.set("type", TYPES.get(sf.attrib["eType"], "//@types.2"))
+                if "ecore:EReference" in sf.attrib.values() and "eOpposite" in sf.attrib:
+                    cdm_assoc_node = etree.SubElement(cdm_class_node, "associationEnds")
+                    cdm_assoc_node.set("name", sf.attrib["name"])
+                    #print(i, clazz.name, clazz.associations)
+                    assoc = list(clazz.associations.values())[i]
+                    cdm_assoc_node.set("assoc", f"//@associations.{assoc.aid}")
+                    cdm_assoc_node.set("upperBound", "-1")  # TODO Handle multiplicities
+                    i += 1
 
-            print(etree.tostring(cdm_class_node))
-            cdm_class_nodes.append(cdm_class_node)
-            print()
+            #print(etree.tostring(cdm_class_node))
+            cdm_class_nodes[e.attrib["name"]] = cdm_class_node
+            #print()
 
-    print(cdm_class_nodes)
+    for a in associations:
+        a_node = etree.Element("associations", name=f"{a.classes[0]}_{a.classes[1]}",
+            ends=f"//@classes.{class_names.index(a.classes[0].name)}/"
+                 f"@associationEnds.{list(a.classes[0].associations.values()).index(a)} "  # this space is intentional
+                 f"//@classes.{class_names.index(a.classes[1].name)}/"
+                 f"@associationEnds.{list(a.classes[1].associations.values()).index(a)}")
+        cdm_assoc_nodes.append(a_node)
+        #print(etree.tostring(a_node))
 
-    "".replace("xsitype", "xsi:type")  # Do this before returning result
-    return '<?xml version="1.0" encoding="ASCII"?>\n' + ""  # whatever the result is
+    result = ecore.split("<eClassifiers")[0]
+    for c in class_names:
+        result += etree.tostring(cdm_class_nodes[c]).decode("utf-8") + "\n"
+
+    result += """
+  <types xsi:type="classdiagram:CDVoid"/>
+  <types xsi:type="classdiagram:CDAny"/>
+  <types xsi:type="classdiagram:CDBoolean"/>
+  <types xsi:type="classdiagram:CDDouble"/>
+  <types xsi:type="classdiagram:CDInt"/>
+  <types xsi:type="classdiagram:CDLong"/>
+  <types xsi:type="classdiagram:CDString"/>
+  <types xsi:type="classdiagram:CDByte"/>
+  <types xsi:type="classdiagram:CDFloat"/>
+  <types xsi:type="classdiagram:CDChar"/>
+  """
+
+    for c in cdm_assoc_nodes:
+        result += etree.tostring(c).decode("utf-8") + "\n"
+
+    result += get_class_layouts(len(class_names))
+
+    result = result.replace("xsitype", "xsi:type")  # Do this before returning result
+    return '<?xml version="1.0" encoding="ASCII"?>\n' + result + "\n</classdiagram:ClassDiagram>"  # whatever the result is
     # except Exception as e:
     #     print()
     #     return ""
@@ -154,8 +275,24 @@ def transform(files: List[str]):
     for fn in files:
         with open(fn) as f:
             cdm = ecore2cdm(f.read())
-            #print(cdm)
+            with open("data/res2.cdm", "w") as g:
+                g.write(cdm)
+
+def transform2():
+    i = 1
+    for filename in os.listdir("dataset/umple_files"):
+        #print(filename)
+        if filename.endswith(".ecore"):
+            try:
+                with open(f"dataset/umple_files/{filename}") as f:
+                    cdm = ecore2cdm(f.read())
+                    with open(f"out/{i}.cdm", "w") as g:
+                        print(f"{i}.cdm <- {filename}")
+                        g.write(cdm)
+                        i += 1
+            except:
+                pass
 
 
 if __name__ == "__main__":
-    transform([IN])
+    transform(["dataset/umple_files/260684709_umpleProgram.ecore"])

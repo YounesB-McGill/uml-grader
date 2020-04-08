@@ -36,10 +36,10 @@ autounique matchId;
 }
 
 class PlayerStatistics {
-* -- 0..1 Player player;
-Integer points;
-Integer assists;
-Integer rebounds;
+  * -- 0..1 Player player;
+  Integer points;
+  Integer assists;
+  Integer rebounds;
 }
 
 class VirtualScore {
