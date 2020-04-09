@@ -168,6 +168,11 @@ def ecore2cdm(ecore: str) -> str:
     for e in root:
         if "ecore:EClass" in e.attrib.values():
             class_name = e.attrib["name"]
+            if class_name not in class_names:
+                class_names.append(class_name)
+                classes.append(Class(class_name))
+            
+            #print(class_name)
 
             for sf in e:
                 # some one dir associations are missing from the ecore source
@@ -201,9 +206,9 @@ def ecore2cdm(ecore: str) -> str:
                     associations.append(assoc)
 
 
-    #print(classes, "\n", associations)
+    # print(classes, "\n", associations)
 
-    #exit(0)
+    # exit(0)
 
     cdm_class_nodes = {}
     cdm_assoc_nodes = []
@@ -275,7 +280,7 @@ def transform(files: List[str]):
     for fn in files:
         with open(fn) as f:
             cdm = ecore2cdm(f.read())
-            with open("data/res2.cdm", "w") as g:
+            with open("data/res7.cdm", "w") as g:
                 g.write(cdm)
 
 def transform2():
@@ -295,4 +300,5 @@ def transform2():
 
 
 if __name__ == "__main__":
-    transform(["dataset/umple_files/260684709_umpleProgram.ecore"])
+    #transform(["dataset/umple_files/Assignment2Model.ecore"])
+    transform2()
