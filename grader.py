@@ -7,17 +7,19 @@ import shutil
 import subprocess
 import zipfile
 
+from pyunpack import Archive
+
 # To avoid bloating this repository, make this point to your local umple executable
 UMPLE_BIN = os.path.expanduser("~/umple/dev-tools/umple")
 
 DATA_LOC = "dataset"
 UMPLE_FILES_LOC = "dataset/umple_files"
+TMP_LOC = "tmp/"
 
 
 def transform_ump_to_ecore():
-    print(os.getcwd())
     for filename in os.listdir(UMPLE_FILES_LOC):
-        cmd = f'{UMPLE_BIN} --generate Ecore {os.path.join(UMPLE_FILES_LOC, filename)}'
+        cmd = f'{UMPLE_BIN} --generate Ecore {filename}'
         print(cmd)
         # proc = run_process(f'{UMPLE_BIN} --generate Ecore "{filename}"')
 
@@ -26,27 +28,52 @@ def transform_ump_to_ecore():
 
 
 def extract_and_clean_data(path: str):
-    for filename in os.listdir(path):
-        if filename.endswith(".html"):
-            os.remove(os.path.join(path, filename))
+    # Files already extracted
+    # for filename in os.listdir(path):
+    #     if filename.endswith(".html"):
+    #         os.remove(os.path.join(path, filename))
 
-        # TODO Handle rar and 7z archives
-        if filename.endswith(".zip"):
-            print(f"Attempting to open {filename}")
-            with zipfile.ZipFile(os.path.join(path, filename), 'r') as z:
-                print(os.path.join(path, filename[:-4]))
-                z.extractall(os.path.join(path, filename[:-4]))
+    #     if filename.endswith((".zip", ".7z")) and not os.path.isdir(os.path.join(path, filename)):
+    #         print(f"Attempting to open {filename}")
+    #         Archive(os.path.join(path, filename)).extractall(os.path.join(path, "".join(filename.split(".")[:-1])))
 
-    pathlib.Path(UMPLE_FILES_LOC).mkdir(parents=True, exist_ok=True)
+    
+    # pathlib.Path(UMPLE_FILES_LOC).mkdir(parents=True, exist_ok=True)
+    # pathlib.Path(TMP_LOC).mkdir(parents=True, exist_ok=True)
 
-    c = 0
-    for filename in glob.iglob(DATA_LOC + "/**/*.ump", recursive=True):
-        try:
-            shutil.copy2(filename, UMPLE_FILES_LOC)
-        except shutil.SameFileError:
-            fn = filename.split(".")
-            shutil.copy2(filename, f"{fn[0]}{c}.ump")
-            c += 1
+    # Files already copied
+    # n = 0
+    # for filename in glob.iglob(DATA_LOC + "/**/*.ump", recursive=True):
+    #     print(filename)
+    #     fn = "".join("".join(filename.split("/")[-1]).split(".")[:-1])
+    #     np = os.path.join(TMP_LOC, f"{n}_{fn}.ump")
+    #     print(np)
+    #     dest = shutil.copy2(filename, np)
+    #     print()
+    #     n += 1
+
+    n = 1  # 0 is the ideal submission
+    for filename in os.listdir(TMP_LOC):
+        # renumber files to avoid skipping deleted duplicates
+        shutil.copy2(os.path.join(TMP_LOC, filename),
+                     os.path.join(UMPLE_FILES_LOC, f'{n}_{"".join(filename.split("_")[1:])}'))
+        n += 1
+
+    print(f">>>>>>>>>>> n: {n}")
+
+    # rename files to ensure none have spaces
+    for filename in os.listdir(UMPLE_FILES_LOC):
+        if " " in filename:
+            os.rename(os.path.join(UMPLE_FILES_LOC, filename),
+                      os.path.join(UMPLE_FILES_LOC, filename.replace(" ", "_")))
+
+    # Replace all unidirectional associations -> or <- with bidirectional ones --
+    for filename in os.listdir(UMPLE_FILES_LOC):
+        with open(os.path.join(UMPLE_FILES_LOC, filename), "r") as f:
+            content = f.read()
+        with open(os.path.join(UMPLE_FILES_LOC, filename), "w") as f:
+            content = content.replace("<-", "--").replace("->", "--")
+            f.write(content)
 
 
 def run_process(cmd):
@@ -56,4 +83,8 @@ def run_process(cmd):
 
 
 if __name__ == "__main__":
+    # shutil.rmtree(UMPLE_FILES_LOC, ignore_errors=True)
+    # shutil.rmtree(TMP_LOC, ignore_errors=True)
+
+    # extract_and_clean_data(DATA_LOC)
     transform_ump_to_ecore()

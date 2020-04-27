@@ -63,7 +63,7 @@ def make_association(class1: Class, class2: Class, label1="", label2="") -> Asso
     return assoc
 
 
-def get_class_by_name(classes: List[Class], name: str) -> str:
+def get_class_by_name(classes: List[Class], name: str) -> Class:
     for c in classes:
         if c.name == name:
             return c
@@ -175,16 +175,33 @@ def ecore2cdm(ecore: str) -> str:
             #print(class_name)
 
             for sf in e:
-                # some one dir associations are missing from the ecore source
-                if "ecore:EReference" in sf.attrib.values() and "eOpposite" in sf.attrib:  
-                    other_class, assoc_name = sf.attrib["eOpposite"].replace("_", "").replace("#//", "").split("/")
-                    if "_" in sf.attrib["eOpposite"]:
-                        print(f"WARNING: {sf.attrib['eOpposite']} contains underscores, which have been removed.")
-                    if f"{other_class}_{class_name}" in assoc_pairs:
+                if "ecore:EReference" in sf.attrib.values():
+                    other_class = sf.attrib["eType"].replace("#//", "")
+
+                    if "eOpposite" in sf.attrib:
+                        if "_" in sf.attrib["eOpposite"]:
+                            print(f"WARNING: {sf.attrib['eOpposite']} contains underscores, which have been removed.")
+                        assoc_name = sf.attrib["eOpposite"].replace("_", "").replace("#//", "").split("/")[1]
+                    else:
+                        assoc_name = aid  # to still have a unique id
+                    
+                    if f"{other_class}_{class_name}" in assoc_pairs and "eOpposite" in sf.attrib:
+                        # if f"{other_class}_{class_name}" == "League_User":
+                        #     print(f"Already processed {other_class}_{class_name}, so won't process {class_name}_{other_class}")
+                        #     print(sf.attrib)
+                            #exit()
                         # we already processed the association(s) in the other direction
                         continue
-                    assoc_pairs.append(f"{class_name}_{other_class}")
 
+                    if "eOpposite" in sf.attrib:
+                        # only track associations with an explicit other class (ignore those styled as attributes)
+                        # if f"{class_name}_{other_class}" == "League_User":
+                        #     print(f"Appending {class_name}_{other_class}")
+                        assoc_pairs.append(f"{class_name}_{other_class}")
+
+                    # Need to add classes here as well, since we might need a class ahead of its iteration order
+                    # eg, if our classes are ABCD and A-D is an association, we will need to create class D at
+                    # the time we are iterating at class A
                     if class_name in class_names:
                         class1 = get_class_by_name(classes, class_name)
                     else:
@@ -206,14 +223,17 @@ def ecore2cdm(ecore: str) -> str:
                     associations.append(assoc)
 
 
-    # print(classes, "\n", associations)
+    # print(classes)
+    # [print(a) for a in associations]
+
+    # print(get_class_by_name(classes, "User").associations)
 
     # exit(0)
 
     cdm_class_nodes = {}
     cdm_assoc_nodes = []
 
-    # make classes with attributes
+    # make classes with attributes and link associations to them
     for e in root:
         if "ecore:EClass" in e.attrib.values():
             cdm_class_node = etree.Element("classes", xsitype="classdiagram:Class", name=e.attrib["name"])
@@ -224,11 +244,12 @@ def ecore2cdm(ecore: str) -> str:
                 if "ecore:EAttribute" in sf.attrib.values():
                     cdm_attr_node = etree.SubElement(cdm_class_node, "attributes")
                     cdm_attr_node.set("name", sf.attrib["name"])
-                    cdm_attr_node.set("type", TYPES.get(sf.attrib["eType"], "//@types.2"))
-                if "ecore:EReference" in sf.attrib.values() and "eOpposite" in sf.attrib:
+                    cdm_attr_node.set("type", TYPES.get(sf.attrib.get("eType"), "//@types.2"))
+                if "ecore:EReference" in sf.attrib.values():
                     cdm_assoc_node = etree.SubElement(cdm_class_node, "associationEnds")
                     cdm_assoc_node.set("name", sf.attrib["name"])
-                    #print(i, clazz.name, clazz.associations)
+                    # print(sf.attrib)
+                    # print(i, clazz.name, clazz.associations)
                     assoc = list(clazz.associations.values())[i]
                     cdm_assoc_node.set("assoc", f"//@associations.{assoc.aid}")
                     cdm_assoc_node.set("upperBound", "-1")  # TODO Handle multiplicities
@@ -239,6 +260,9 @@ def ecore2cdm(ecore: str) -> str:
             #print()
 
     for a in associations:
+        # print(a.classes[0], a.classes[0].associations)
+        # print(a.classes[1], a.classes[1].associations)
+
         a_node = etree.Element("associations", name=f"{a.classes[0]}_{a.classes[1]}",
             ends=f"//@classes.{class_names.index(a.classes[0].name)}/"
                  f"@associationEnds.{list(a.classes[0].associations.values()).index(a)} "  # this space is intentional
@@ -270,7 +294,7 @@ def ecore2cdm(ecore: str) -> str:
     result += get_class_layouts(len(class_names))
 
     result = result.replace("xsitype", "xsi:type")  # Do this before returning result
-    return '<?xml version="1.0" encoding="ASCII"?>\n' + result + "\n</classdiagram:ClassDiagram>"  # whatever the result is
+    return '<?xml version="1.0" encoding="ASCII"?>\n' + result + "\n</classdiagram:ClassDiagram>"
     # except Exception as e:
     #     print()
     #     return ""
@@ -280,13 +304,15 @@ def transform(files: List[str]):
     for fn in files:
         with open(fn) as f:
             cdm = ecore2cdm(f.read())
-            with open("data/res7.cdm", "w") as g:
+            with open("data/res2.cdm", "w") as g:
                 g.write(cdm)
 
+
 def transform2():
-    i = 1
+    global aid
+    i = 0
     for filename in os.listdir("dataset/umple_files"):
-        #print(filename)
+        aid = 0
         if filename.endswith(".ecore"):
             try:
                 with open(f"dataset/umple_files/{filename}") as f:
@@ -295,10 +321,10 @@ def transform2():
                         print(f"{i}.cdm <- {filename}")
                         g.write(cdm)
                         i += 1
-            except:
-                pass
+            except Exception as e:
+                print(f"\nFailed to transform {filename}, with {type(e)}:\n{e}\n")
 
 
 if __name__ == "__main__":
-    #transform(["dataset/umple_files/Assignment2Model.ecore"])
+    #transform(["dataset/umple_files/assignment2.ecore"])
     transform2()
