@@ -1,0 +1,1693 @@
+out/27.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+2.0: Class Matched with Player
+2.0: Class Matched with VirtualScore wrong name
+2.0: Class Matched with Team
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with Match
+2.0: Class Matched with PlayerStatistics wrong name
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With VirtualTeam.name Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With VirtualTeam.ranking Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With VirtualTeam.score Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With Match.matchId| Wrong type
+1.0: Class: Season represent Attribute: season
+0.0: bench Matched
+0.0: bench Matched
+0.0: team Matched
+0.0: players Matched
+0.0: score Matched
+0.0: player Matched
+1.0: Derivative association in regular association
+1.0: Derivative association in regular association
+Final result:25.0
+
+
+out/1.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Team
+4.0: Matched Class for Player&PlayerStatistics: 
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Class: Ranking represent Attribute: ranking
+1.0: Class: Game represent Attribute: name
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.points Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.assists Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+Final result:16.0
+
+
+out/10.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+2.0: Class Matched with VirtualScore wrong name
+2.0: Class Matched with Team
+2.0: Class Matched with Match
+3.0: Class Matched with FantasyBasketball
+2.0: Class Matched with Player
+2.0: Class Matched with PlayerStatistics
+2.0: Class Matched with VirtualTeam
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With VirtualTeam.score Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Class: Match represent Attribute: matchId
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.assists Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+0.0: startingPlayers Matched
+0.0: virtualTeams Matched
+0.0: myTeam Matched
+0.0: fantasyUser Matched
+1.0: Derivative association in regular association
+1.0: Derivative association in regular association
+Final result:27.0
+
+
+out/11.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with PlayerStatistics wrong name
+2.0: Class Matched with Player
+2.0: Class Matched with Team
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Class: Game represent Attribute: name
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+0.0: stat Matched
+0.0: players Matched
+0.0: team Matched
+0.0: players Matched
+Final result:14.0
+
+
+out/13.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Team
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with VirtualScore wrong name
+2.0: Class Matched with Player
+2.0: Class Matched with PlayerStatistics wrong name
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Class: Ranking represent Attribute: ranking
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+0.0: realTeam Matched
+0.0: realPlayer Matched
+0.0: team Matched
+0.0: teamMember Matched
+0.0: score Matched
+0.0: player Matched
+Final result:17.0
+
+
+out/14.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Player
+2.0: Class Matched with PlayerStatistics wrong name
+2.0: Class Matched with Team
+2.0: Class Matched with Match
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Class: Ranking represent Attribute: ranking
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+0.0: score Matched
+0.0: player Matched
+0.0: score Matched
+0.0: realMatch Matched
+0.0: virtualTeams Matched
+0.0: player Matched
+1.0: Derivative association in regular association
+Final result:18.0
+
+
+out/15.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+2.0: Class Matched with PlayerStatistics wrong name
+2.0: Class Matched with Match wrong name
+3.0: Class Matched with FantasyBasketball
+2.0: Class Matched with Player
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with Team
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Class: FantasySeason represent Attribute: season
+1.0: Class: Ranking represent Attribute: ranking
+1.0: Class: NBASeason represent Attribute: season
+1.0: Attribute Misplaced Match With Team.name Matched
+0.0: scores Matched
+0.0: game Matched
+0.0: scores Matched
+0.0: player Matched
+0.0: virtualTeams Matched
+0.0: starter Matched
+0.0: nbaTeam Matched
+0.0: players Matched
+0.0: game Matched
+0.0: nBATeams Matched
+0.0: bench Matched
+0.0: players Matched
+1.0: Derivative association in regular association
+Final result:24.0
+
+
+out/16.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Team
+2.0: Class Matched with Player
+4.0: Matched Class for Match&PlayerStatistics: 
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.points Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.assists Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+0.0: matchResults Matched
+0.0: player Matched
+Final result:15.0
+
+
+out/17.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Match wrong name
+2.0: Class Matched with Team
+3.0: Class Matched with FantasyBasketball
+2.0: Class Matched with Player
+2.0: Class Matched with PlayerStatistics
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Class: Points represent Attribute: points
+1.0: Attribute Misplaced Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.assists Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+0.0: users Matched
+0.0: fantasyGame Matched
+0.0: player Matched
+0.0: fantasyGames Matched
+0.0: user Matched
+0.0: virtualTeam Matched
+1.0: Derivative association in regular association
+Final result:21.0
+
+
+out/18.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Team
+2.0: Class Matched with Player
+2.0: Class Matched with VirtualScore wrong name
+2.0: Class Matched with PlayerStatistics wrong name
+2.0: Class Matched with Match
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Class: Ranking represent Attribute: ranking
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+0.0: playerPerformances Matched
+0.0: player Matched
+0.0: playerPerformances Matched
+0.0: match Matched
+0.0: virtualTeams Matched
+0.0: players Matched
+Final result:21.0
+
+
+out/19.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Team
+2.0: Class Matched with Player
+2.0: Class Matched with PlayerStatistics
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Class: Ranking represent Attribute: ranking
+1.0: Class: Game represent Attribute: name
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+0.0: playerScore Matched
+0.0: player Matched
+Final result:15.0
+
+
+out/2.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with VirtualScore wrong name
+2.0: Class Matched with Team
+4.0: Matched Class for Player&PlayerStatistics: 
+1.0: Attribute Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.points Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.assists Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+1.0: Derivative association in regular association
+Final result:18.0
+
+
+out/20.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with VirtualScore wrong name
+2.0: Class Matched with Player
+2.0: Class Matched with PlayerStatistics
+2.0: Class Matched with Team
+2.0: Class Matched with VirtualTeam
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With VirtualTeam.score Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Class: Game represent Attribute: name
+0.0: playerStatsPerGames Matched
+0.0: player Matched
+0.0: benchPlayers Matched
+0.0: virtualTeams Matched
+Final result:18.0
+
+
+out/21.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+2.0: Class Matched with Match
+2.0: Class Matched with Team
+2.0: Class Matched with Player
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with PlayerStatistics wrong name
+2.0: Class Matched with VirtualScore wrong name
+3.0: Class Matched with FantasyBasketball
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With VirtualTeam.name Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Misplaced Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+0.0: realTeam Matched
+0.0: players Matched
+0.0: season Matched
+0.0: realTeams Matched
+0.0: virtualTeams Matched
+0.0: fantasyBasketball Matched
+0.0: performance Matched
+0.0: player Matched
+0.0: benchTeam Matched
+0.0: benchPlayers Matched
+1.0: Derivative association in regular association
+1.0: Derivative association in regular association
+Final result:27.0
+
+
+out/22.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with VirtualScore wrong name
+2.0: Class Matched with PlayerStatistics wrong name
+2.0: Class Matched with Player
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with Team
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With VirtualTeam.score Matched
+1.0: Attribute Match With VirtualTeam.name Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Misplaced Match With VirtualTeam.ranking Matched
+0.0: teamsAsStarter Matched
+0.0: starter Matched
+0.0: rank Matched
+0.0: virtualteams Matched
+0.0: teamsOnBench Matched
+0.0: bench Matched
+0.0: team Matched
+0.0: player Matched
+0.0: score Matched
+0.0: player Matched
+Final result:20.0
+
+
+out/23.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with PlayerStatistics wrong name
+2.0: Class Matched with Team
+2.0: Class Matched with Match
+2.0: Class Matched with VirtualScore wrong name
+2.0: Class Matched with Player
+1.0: Attribute Match With VirtualTeam.ranking Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Class: SeasonManager represent Attribute: season
+0.0: points Matched
+0.0: matchs Matched
+0.0: users Matched
+0.0: teams Matched
+0.0: points Matched
+0.0: players Matched
+0.0: virtualTeam Matched
+0.0: players Matched
+Final result:19.0
+
+
+out/24.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with PlayerStatistics
+2.0: Class Matched with Team
+2.0: Class Matched with Player
+3.0: Class Matched with FantasyBasketball
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Class: Game represent Attribute: name
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+0.0: team Matched
+0.0: virtualPlayers Matched
+0.0: playerScore Matched
+0.0: player Matched
+0.0: teams Matched
+0.0: fantasyBasketballCompetition Matched
+1.0: Derivative association in regular association
+Final result:19.0
+
+
+out/25.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+2.0: Class Matched with PlayerStatistics
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with Match
+2.0: Class Matched with Player
+2.0: Class Matched with VirtualScore wrong name
+2.0: Class Matched with Team
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Class: Ranking represent Attribute: ranking
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+0.0: nBATeam Matched
+0.0: players Matched
+0.0: playerscore Matched
+0.0: player Matched
+0.0: nBASeason Matched
+0.0: nBATeams Matched
+0.0: virtualTeam Matched
+0.0: players Matched
+0.0: playerscores Matched
+0.0: match Matched
+1.0: Derivative association in regular association
+1.0: Derivative association in regular association
+Final result:24.0
+
+
+out/26.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Player
+2.0: Class Matched with Team
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.points Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.assists Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+Final result:12.0
+
+
+out/28.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with Team
+2.0: Class Matched with VirtualScore
+4.0: Matched Class for Player&PlayerStatistics: 
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Misplaced Match With VirtualTeam.ranking Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.points Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.assists Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+0.0: calculatedscore Matched
+0.0: virtualTeam Matched
+Final result:19.0
+
+
+out/29.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with PlayerStatistics wrong name
+2.0: Class Matched with Team
+2.0: Class Matched with Player
+2.0: Class Matched with VirtualScore
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With VirtualTeam.score Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Misplaced Match With VirtualTeam.ranking Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+0.0: playerPerformance Matched
+0.0: player Matched
+0.0: virtualTeams Matched
+0.0: player Matched
+1.0: Derivative association in regular association
+Final result:21.0
+
+
+out/3.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with Player
+2.0: Class Matched with Match
+2.0: Class Matched with Team
+2.0: Class Matched with VirtualScore wrong name
+3.0: Class Matched with FantasyBasketball
+1.0: Attribute Match With VirtualTeam.name Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Misplaced Match With Match.matchId Matched
+1.0: Attribute Misplaced Match With VirtualTeam.ranking Matched
+1.0: Attribute Misplaced Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.assists Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+0.0: benchTeam Matched
+0.0: benchPlayers Matched
+0.0: season Matched
+0.0: nBATeams Matched
+0.0: virtualTeams Matched
+0.0: fantasyBasketball Matched
+0.0: nBATeam Matched
+0.0: players Matched
+1.0: Derivative association in regular association
+1.0: Derivative association in regular association
+Final result:25.0
+
+
+out/30.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with Team
+2.0: Class Matched with PlayerStatistics wrong name
+2.0: Class Matched with Player
+2.0: Class Matched with Match
+2.0: Class Matched with VirtualScore
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Class: Ranking represent Attribute: ranking
+1.0: Class: NbaSeason represent Attribute: season
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+0.0: playingTeams Matched
+0.0: playedMatches Matched
+0.0: virtualTeams Matched
+0.0: virtualPlayers Matched
+0.0: realTeam Matched
+0.0: realPlayers Matched
+1.0: Derivative association in regular association
+Final result:20.0
+
+
+out/32.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Player
+2.0: Class Matched with Match
+2.0: Class Matched with PlayerStatistics
+2.0: Class Matched with Team
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Class: Ranking represent Attribute: ranking
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+0.0: playerScores Matched
+0.0: realMatch Matched
+0.0: playerScores Matched
+0.0: participatingPlayer Matched
+0.0: virtualTeams Matched
+0.0: player Matched
+Final result:17.0
+
+
+out/33.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with PlayerStatistics wrong name
+2.0: Class Matched with Match
+2.0: Class Matched with Team
+2.0: Class Matched with VirtualTeam
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With VirtualTeam.name Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Class: Ranking represent Attribute: ranking
+1.0: Class: Season represent Attribute: season
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With Player.firstName Matched
+1.0: Attribute Misplaced Match With Player.licenseId Matched
+0.0: scores Matched
+0.0: match Matched
+1.0: Derivative association in regular association
+1.0: Derivative association in regular association
+1.0: Derivative association in regular association
+Final result:21.0
+
+
+out/34.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Team
+2.0: Class Matched with Player
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Misplaced Match With VirtualTeam.ranking Matched
+1.0: Attribute Misplaced Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+0.0: virtualTeam Matched
+0.0: startingLineUp Matched
+1.0: Derivative association in regular association
+Final result:13.0
+
+
+out/35.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Player
+2.0: Class Matched with PlayerStatistics wrong name
+2.0: Class Matched with Team
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Class: RankTable represent Attribute: ranking
+1.0: Class: Game represent Attribute: name
+1.0: Attribute Misplaced Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+0.0: scores Matched
+0.0: player Matched
+Final result:16.0
+
+
+out/36.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+2.0: Class Matched with PlayerStatistics
+2.0: Class Matched with Team
+2.0: Class Matched with Match
+2.0: Class Matched with Player
+2.0: Class Matched with VirtualScore
+2.0: Class Matched with VirtualTeam
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Class: Rankings represent Attribute: ranking
+1.0: Class: Season represent Attribute: season
+0.0: playerPoint Matched
+0.0: player Matched
+0.0: virtualTeams Matched
+0.0: player Matched
+0.0: playerPoints Matched
+0.0: match Matched
+0.0: realTeam Matched
+0.0: player Matched
+1.0: Derivative association in regular association
+Final result:17.0
+
+
+out/37.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with Match wrong name
+2.0: Class Matched with PlayerStatistics wrong name
+3.0: Class Matched with FantasyBasketball
+2.0: Class Matched with Player
+2.0: Class Matched with Team
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Match.season Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.points Matched
+0.0: nbaSeason Matched
+0.0: team Matched
+0.0: nbaSeason Matched
+0.0: realTeam Matched
+0.0: virtualPlayers Matched
+0.0: player Matched
+0.0: realTeam Matched
+0.0: rTeamMembers Matched
+0.0: game Matched
+0.0: rPlayer Matched
+0.0: game Matched
+0.0: nbaSeason Matched
+0.0: vTeamMembers Matched
+0.0: team Matched
+Final result:21.0
+
+
+out/4.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with VirtualTeam
+3.0: Class Matched with FantasyBasketball
+2.0: Class Matched with Team
+4.0: Matched Class for Match&PlayerStatistics: 
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+1.0: Attribute Misplaced Match With Player.firstName Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.points Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.assists Matched
+1.0: Attribute Misplaced Match With Player.licenseId Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+0.0: game Matched
+0.0: players Matched
+0.0: matchScore Matched
+0.0: players Matched
+0.0: team Matched
+0.0: players Matched
+1.0: Derivative association in regular association
+1.0: Derivative association in regular association
+Final result:21.0
+
+
+out/41.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Team
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with Player
+2.0: Class Matched with PlayerStatistics wrong name
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Class: Scorer represent Attribute: score
+1.0: Attribute Misplaced Match With Match.matchId Matched
+1.0: Attribute Misplaced Match With VirtualTeam.ranking Matched
+1.0: Attribute Misplaced Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+0.0: benches Matched
+0.0: benchPlayers Matched
+0.0: tripleDouble Matched
+0.0: player Matched
+1.0: Derivative association in regular association
+1.0: Derivative association in regular association
+Final result:22.0
+
+
+out/42.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with Team
+2.0: Class Matched with Match
+3.0: Class Matched with FantasyBasketball wrong name
+4.0: Matched Class for Player&PlayerStatistics: 
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Class: BenchPlayer represent Attribute: playerScoreInMatch
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.points Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.assists Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+0.0: realTeams Matched
+0.0: dataInputters Matched
+0.0: players Matched
+0.0: dataInputters Matched
+0.0: realTeam Matched
+0.0: players Matched
+0.0: realMatchs Matched
+0.0: dataInputters Matched
+1.0: Derivative association in regular association
+Final result:24.0
+
+
+out/43.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+3.0: Class Matched with FantasyBasketball
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with Team
+2.0: Class Matched with Match
+4.0: Matched Class for Player&PlayerStatistics: 
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Misplaced Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.points Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.assists Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+0.0: nBATeam Matched
+0.0: players Matched
+0.0: startingLineUp Matched
+0.0: teamsStartingLineUp Matched
+1.0: Derivative association in regular association
+1.0: Derivative association in regular association
+Final result:24.0
+
+
+out/46.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Team
+4.0: Matched Class for Player&PlayerStatistics: 
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Misplaced Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.points Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.assists Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+0.0: teams Matched
+0.0: roster Matched
+Final result:15.0
+
+
+out/47.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Match
+3.0: Class Matched with FantasyBasketball wrong name
+2.0: Class Matched with VirtualTeam wrong name
+2.0: Class Matched with Player
+2.0: Class Matched with Team
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+0.0: performance Matched
+0.0: player Matched
+0.0: vteam Matched
+0.0: fantasyBballManager Matched
+0.0: player Matched
+0.0: fantasyBballManager Matched
+0.0: match Matched
+0.0: fantasyBballManager Matched
+0.0: performance Matched
+0.0: fantasyBballManager Matched
+0.0: vTeam Matched
+0.0: player Matched
+1.0: Derivative association in regular association
+Final result:16.0
+
+
+out/49.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Player
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with Team
+2.0: Class Matched with VirtualScore wrong name
+2.0: Class Matched with PlayerStatistics wrong name
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With VirtualTeam.score Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Class: Rank represent Attribute: ranking
+0.0: playerScore Matched
+0.0: player Matched
+Final result:20.0
+
+
+out/5.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with Team
+2.0: Class Matched with Player
+2.0: Class Matched with PlayerStatistics
+2.0: Class Matched with VirtualScore wrong name
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Class: Ranking represent Attribute: ranking
+1.0: Class: Game represent Attribute: name
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+0.0: team Matched
+0.0: players Matched
+0.0: statistics Matched
+0.0: player Matched
+Final result:20.0
+
+
+out/50.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Player
+2.0: Class Matched with PlayerStatistics wrong name
+2.0: Class Matched with Team
+2.0: Class Matched with VirtualScore wrong name
+1.0: Attribute Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+0.0: teams Matched
+0.0: players Matched
+0.0: performance Matched
+0.0: player Matched
+1.0: Derivative association in regular association
+Final result:18.0
+
+
+out/51.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with PlayerStatistics wrong name
+2.0: Class Matched with Player
+2.0: Class Matched with Team
+2.0: Class Matched with Match
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Class: LiveRanking represent Attribute: ranking
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+0.0: score Matched
+0.0: player Matched
+0.0: score Matched
+0.0: realMatch Matched
+0.0: teams Matched
+0.0: players Matched
+1.0: Derivative association in regular association
+Final result:19.0
+
+
+out/52.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Match
+2.0: Class Matched with Team
+2.0: Class Matched with PlayerStatistics
+2.0: Class Matched with Player
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Class: Game represent Attribute: name
+1.0: Attribute Misplaced Match With VirtualTeam.ranking Matched
+1.0: Attribute Misplaced Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With Team.season Matched
+0.0: benchPlayers Matched
+0.0: players Matched
+1.0: Derivative association in regular association
+1.0: Derivative association in regular association
+Final result:19.0
+
+
+out/53.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+2.0: Class Matched with Match
+2.0: Class Matched with PlayerStatistics
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with VirtualScore
+2.0: Class Matched with Team
+2.0: Class Matched with Player
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Class: TeamRank represent Attribute: ranking
+1.0: Class: Season represent Attribute: season
+0.0: realTeam Matched
+0.0: player Matched
+0.0: playerPoint Matched
+0.0: player Matched
+0.0: playerPoints Matched
+0.0: match Matched
+1.0: Derivative association in regular association
+Final result:22.0
+
+
+out/6.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Match
+2.0: Class Matched with Team
+2.0: Class Matched with Player
+3.0: Class Matched with FantasyBasketball
+2.0: Class Matched with PlayerStatistics wrong name
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Class: Season represent Attribute: season
+1.0: Attribute Misplaced Match With Match.matchId Matched
+1.0: Attribute Misplaced Match With VirtualTeam.ranking Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With VirtualTeam.name Matched
+0.0: virtualTeams Matched
+0.0: fantasyBasketball Matched
+0.0: virtualTeams Matched
+0.0: basketballPlayers Matched
+0.0: perfOfPlayers Matched
+0.0: match Matched
+0.0: perfOfPlayers Matched
+0.0: basketballPlayer Matched
+Final result:23.0
+
+
+out/7.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with Team
+2.0: Class Matched with VirtualScore wrong name
+4.0: Matched Class for Player&PlayerStatistics: 
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Class: Rank represent Attribute: ranking
+1.0: Attribute Misplaced Match With VirtualScore.playerScoreInMatch Matched
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.points Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.assists Matched
+1.0: Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+0.0: user Matched
+0.0: virtualTeams Matched
+0.0: team Matched
+0.0: player Matched
+0.0: virtualTeams Matched
+0.0: players Matched
+Final result:20.0
+
+
+out/8.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+2.0: Class Matched with PlayerStatistics wrong name
+2.0: Class Matched with VirtualScore wrong name
+2.0: Class Matched with Team
+2.0: Class Matched with VirtualTeam
+2.0: Class Matched with Match
+2.0: Class Matched with Player
+1.0: Attribute Match With VirtualTeam.name Matched
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With VirtualTeam.score Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Class: NBASeason represent Attribute: season
+1.0: Attribute Misplaced Match With VirtualTeam.ranking Matched
+0.0: realTeam Matched
+0.0: players Matched
+0.0: performances Matched
+0.0: match Matched
+0.0: performances Matched
+0.0: player Matched
+0.0: user Matched
+0.0: virtualTeam Matched
+Final result:23.0
+
+
+out/9.cdm
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Attribute missing
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+0.0: Missing class
+2.0: Class Matched with Team
+2.0: Class Matched with Player
+2.0: Class Matched with PlayerStatistics wrong name
+1.0: Attribute Match With PlayerStatistics.points Matched
+1.0: Attribute Match With Team.name Matched
+1.0: Attribute Match With PlayerStatistics.assists Matched
+1.0: Attribute Match With Player.lastName Matched
+1.0: Attribute Match With PlayerStatistics.rebounds Matched
+1.0: Attribute Match With Player.licenseId Matched
+1.0: Attribute Match With Player.firstName Matched
+1.0: Class: Ranking represent Attribute: ranking
+1.0: Class: BenchPlayer represent Attribute: playerScoreInMatch
+1.0: Class: Game represent Attribute: name
+1.0: Attribute Misplaced Match With VirtualTeam.score Matched
+0.0: scores Matched
+0.0: player Matched
+Final result:17.0
+
+
+out/0.cdm
+FantasyBasketball: 2.0|Class Matched with FantasyBasketball
+Player: 2.0|Class Matched with Player
+VirtualTeam: 2.0|Class Matched with VirtualTeam
+VirtualScore: 2.0|Class Matched with VirtualScore
+Team: 2.0|Class Matched with Team
+PlayerStatistics: 2.0|Class Matched with PlayerStatistics
+Match: 2.0|Class Matched with Match
+ranking: 1.0|Attribute Match With VirtualTeam.ranking Matched
+firstName: 1.0|Attribute Match With Player.firstName Matched
+points: 1.0|Attribute Match With PlayerStatistics.points Matched
+assists: 1.0|Attribute Match With PlayerStatistics.assists Matched
+name: 1.0|Attribute Match With Team.name Matched
+matchId: 1.0|Attribute Match With Match.matchId Matched
+score: 1.0|Attribute Match With VirtualTeam.score Matched
+season: 1.0|Attribute Match With Match.season Matched
+season: 1.0|Attribute Match With Team.season Matched
+name: 1.0|Attribute Match With VirtualTeam.name Matched
+playerScoreInMatch: 1.0|Attribute Match With VirtualScore.playerScoreInMatch Matched
+licenseId: 1.0|Attribute Match With Player.licenseId Matched
+lastName: 1.0|Attribute Match With Player.lastName Matched
+rebounds: 1.0|Attribute Match With PlayerStatistics.rebounds Matched
+homeMatches: 1.0|homeMatches Matched
+homeTeam: 1.0|homeTeam Matched
+awayMatches: 1.0|awayMatches Matched
+awayTeam: 1.0|awayTeam Matched
+virtualTeams: 1.0|virtualTeams Matched
+fantasyBasketball: 1.0|fantasyBasketball Matched
+teams: 1.0|teams Matched
+fantasyBasketball: 1.0|fantasyBasketball Matched
+matches: 1.0|matches Matched
+fantasyBasketball: 1.0|fantasyBasketball Matched
+playerStatistics: 1.0|playerStatistics Matched
+player: 1.0|player Matched
+teamsAsStarter: 1.0|teamsAsStarter Matched
+starterPlayers: 1.0|starterPlayers Matched
+teamsOnBench: 1.0|teamsOnBench Matched
+benchPlayers: 1.0|benchPlayers Matched
+playerStats: 1.0|playerStats Matched
+match: 1.0|match Matched
+players: 1.0|players Matched
+fantasyBasketball: 1.0|fantasyBasketball Matched
+virtualScores: 1.0|virtualScores Matched
+virtualTeam: 1.0|virtualTeam Matched
+teams: 1.0|teams Matched
+players: 1.0|players Matched
+------------------------------------------------
+Final result:52.0
+
+
+out/12.cdm
+Match.matchId-Ghost: 0.0|Attribute missing
+Match.season-Ghost: 0.0|Attribute missing
+VirtualTeam-Ghost: 0.0|Missing class
+VirtualScore-Ghost: 0.0|Missing class
+Match: 2.0|Class Matched with Match
+VirtualTeam: 2.0|Class Matched with Team
+FBGS: 2.0|Class Matched with FantasyBasketball wrong name
+Player: 4.0|Matched Class for Player&PlayerStatistics: 
+name: 1.0|Attribute Match With Team.name Matched
+licenseId: 1.0|Attribute Match With Player.licenseId Matched
+firstName: 1.0|Attribute Match With Player.firstName Matched
+lastName: 1.0|Attribute Match With Player.lastName Matched
+name: 1.0|Attribute Misplaced Match With VirtualTeam.name Matched
+nbaSeason: 1.0|Attribute Misplaced Match With Team.season Matched
+rebounds: 1.0|Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+assists: 1.0|Attribute Misplaced Match With PlayerStatistics.assists Matched
+ranking: 1.0|Attribute Misplaced Match With VirtualTeam.ranking Matched
+score: 1.0|Attribute Misplaced Match With VirtualScore.playerScoreInMatch Matched
+score: 1.0|Attribute Misplaced Match With VirtualTeam.score Matched
+points: 1.0|Attribute Misplaced Match With PlayerStatistics.points Matched
+matchs: 1.0|matchs Matched
+winner: 1.0|winner Matched
+virtualTeams: 1.0|virtualTeams Matched
+fBGS: 1.0|fBGS Matched
+virtualTeams: 1.0|virtualTeams Matched
+lineup: 1.0|lineup Matched
+matchs: 1.0|matchs Matched
+fBGS: 1.0|fBGS Matched
+players: 1.0|players Matched
+fBGS: 1.0|fBGS Matched
+------------------------------------------------
+Final result:32.0
+
+
+out/31.cdm
+Team.season-Ghost: 0.0|Attribute missing
+VirtualScore.playerScoreInMatch-Ghost: 0.0|Attribute missing
+Match.matchId-Ghost: 0.0|Attribute missing
+Match.season-Ghost: 0.0|Attribute missing
+VirtualTeam.ranking-Ghost: 0.0|Attribute missing
+VirtualScore-Ghost: 0.0|Missing class
+Match-Ghost: 0.0|Missing class
+ID: 2.0|Class Matched with Player wrong name
+Player: 2.0|Class Matched with FantasyBasketball wrong name
+NBATeam: 2.0|Class Matched with VirtualTeam
+Stats: 2.0|Class Matched with PlayerStatistics wrong name
+VirtualTeam: 2.0|Class Matched with Team
+points: 1.0|Attribute Match With PlayerStatistics.points Matched
+teamNameNBA: 1.0|Attribute Match With VirtualTeam.name Matched
+lastName: 1.0|Attribute Match With Player.lastName Matched
+firstName: 1.0|Attribute Match With Player.firstName Matched
+virtualTeamName: 1.0|Attribute Match With Team.name Matched
+licenceID: 1.0|Attribute Match With Player.licenseId Matched
+rebounds: 1.0|Attribute Match With PlayerStatistics.rebounds Matched
+assists: 1.0|Attribute Match With PlayerStatistics.assists Matched
+ScoreManager: 1.0|Class: ScoreManager represent Attribute: score
+virtualTeams: 1.0|virtualTeams Matched
+startingLineUp: 1.0|startingLineUp Matched
+identification: 1.0|identification Matched
+player: 1.0|player Matched
+nBATeam: 1.0|nBATeam Matched
+players: 1.0|players Matched
+player: 1.0|Derivative association in regular association
+virtualTeam: 1.0|Derivative association in regular association
+------------------------------------------------
+Final result:27.0
+
+
+out/38.cdm
+Match.season-Ghost: 0.0|Attribute missing
+Team.season-Ghost: 0.0|Attribute missing
+Match.matchId-Ghost: 0.0|Attribute missing
+VirtualScore.playerScoreInMatch-Ghost: 0.0|Attribute missing
+VirtualTeam-Ghost: 0.0|Missing class
+Match-Ghost: 0.0|Missing class
+FantasyBasketball-Ghost: 0.0|Missing class
+VirtualScore-Ghost: 0.0|Missing class
+Player: 2.0|Class Matched with Player
+VirtualTeam: 2.0|Class Matched with Team
+PlayerScore: 2.0|Class Matched with PlayerStatistics
+points: 1.0|Attribute Match With PlayerStatistics.points Matched
+lastName: 1.0|Attribute Match With Player.lastName Matched
+firstName: 1.0|Attribute Match With Player.firstName Matched
+teamName: 1.0|Attribute Match With Team.name Matched
+assists: 1.0|Attribute Match With PlayerStatistics.assists Matched
+licenseID: 1.0|Attribute Match With Player.licenseId Matched
+rebounds: 1.0|Attribute Match With PlayerStatistics.rebounds Matched
+LiveRanking: 1.0|Class: LiveRanking represent Attribute: ranking
+userName: 1.0|Attribute Misplaced Match With VirtualTeam.name Matched
+teamScore: 1.0|Attribute Misplaced Match With VirtualTeam.score Matched
+playerScore: 1.0|playerScore Matched
+player: 1.0|player Matched
+------------------------------------------------
+Final result:18.0
+
+
+out/39.cdm
+VirtualScore.playerScoreInMatch-Ghost: 0.0|Attribute missing
+VirtualTeam.name-Ghost: 0.0|Attribute missing
+Match.matchId-Ghost: 0.0|Attribute missing
+Team.season-Ghost: 0.0|Attribute missing
+Match.season-Ghost: 0.0|Attribute missing
+VirtualTeam.ranking-Ghost: 0.0|Attribute missing
+VirtualScore-Ghost: 0.0|Missing class
+VirtualTeam-Ghost: 0.0|Missing class
+Team: 2.0|Class Matched with Team
+FantasyTeam: 2.0|Class Matched with FantasyBasketball
+PlayerPerformance: 2.0|Class Matched with PlayerStatistics wrong name
+Player: 2.0|Class Matched with Player
+Match: 2.0|Class Matched with Match
+rebounds: 1.0|Attribute Match With PlayerStatistics.rebounds Matched
+points: 1.0|Attribute Match With PlayerStatistics.points Matched
+assists: 1.0|Attribute Match With PlayerStatistics.assists Matched
+lastName: 1.0|Attribute Match With Player.lastName Matched
+teamName: 1.0|Attribute Match With Team.name Matched
+firstName: 1.0|Attribute Match With Player.firstName Matched
+lisence_ID: 1.0|Attribute Match With Player.licenseId Matched
+totalScore: 1.0|Attribute Misplaced Match With VirtualTeam.score Matched
+playerPerformances: 1.0|playerPerformances Matched
+player: 1.0|player Matched
+team: 1.0|team Matched
+players: 1.0|players Matched
+player: 1.0|Derivative association in regular association
+------------------------------------------------
+Final result:23.0
+
+
+out/40.cdm
+Match.matchId-Ghost: 0.0|Attribute missing
+VirtualScore.playerScoreInMatch-Ghost: 0.0|Attribute missing
+VirtualTeam.ranking-Ghost: 0.0|Attribute missing
+Team.season-Ghost: 0.0|Attribute missing
+Match.season-Ghost: 0.0|Attribute missing
+FantasyBasketball-Ghost: 0.0|Missing class
+User: 2.0|Class Matched with VirtualScore wrong name
+NbaTeam: 2.0|Class Matched with Team
+NbaMatch: 2.0|Class Matched with Match
+VirtualTeam: 2.0|Class Matched with VirtualTeam
+Player: 4.0|Matched Class for Player&PlayerStatistics: 
+firstName: 1.0|Attribute Match With Player.firstName Matched
+name: 1.0|Attribute Match With Team.name Matched
+totalScore: 1.0|Attribute Match With VirtualTeam.score Matched
+virtualTeamName: 1.0|Attribute Match With VirtualTeam.name Matched
+lastName: 1.0|Attribute Match With Player.lastName Matched
+licenseID: 1.0|Attribute Match With Player.licenseId Matched
+assists: 1.0|Attribute Misplaced Match With PlayerStatistics.assists Matched
+rebounds: 1.0|Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+points: 1.0|Attribute Misplaced Match With PlayerStatistics.points Matched
+virtualTeams: 1.0|virtualTeams Matched
+benchWarmers: 1.0|benchWarmers Matched
+user: 1.0|user Matched
+virtualTeams: 1.0|virtualTeams Matched
+nbaTeam: 1.0|nbaTeam Matched
+players: 1.0|players Matched
+nbaMatchs: 1.0|nbaMatchs Matched
+winner: 1.0|winner Matched
+------------------------------------------------
+Final result:29.0
+
+
+out/44.cdm
+Match.matchId-Ghost: 0.0|Attribute missing
+Match.season-Ghost: 0.0|Attribute missing
+VirtualScore.playerScoreInMatch-Ghost: 0.0|Attribute missing
+VirtualScore-Ghost: 0.0|Missing class
+FantasyBasketball-Ghost: 0.0|Missing class
+VirtualTeam-Ghost: 0.0|Missing class
+Match-Ghost: 0.0|Missing class
+VirtualTeam: 2.0|Class Matched with Team
+Player: 4.0|Matched Class for Player&PlayerStatistics: 
+firstName: 1.0|Attribute Match With Player.firstName Matched
+name: 1.0|Attribute Match With Team.name Matched
+licenseID: 1.0|Attribute Match With Player.licenseId Matched
+lastName: 1.0|Attribute Match With Player.lastName Matched
+Game: 1.0|Class: Game represent Attribute: name
+point: 1.0|Attribute Misplaced Match With PlayerStatistics.points Matched
+ranking: 1.0|Attribute Misplaced Match With VirtualTeam.ranking Matched
+score: 1.0|Attribute Misplaced Match With VirtualTeam.score Matched
+rebound: 1.0|Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+season: 1.0|Attribute Misplaced Match With Team.season Matched
+assist: 1.0|Attribute Misplaced Match With PlayerStatistics.assists Matched
+virtualTeam: 1.0|virtualTeam Matched
+linedUpPlayer: 1.0|linedUpPlayer Matched
+------------------------------------------------
+Final result:19.0
+
+
+out/45.cdm
+PlayerStatistics.assists-Ghost: 0.0|Attribute missing
+Match.season-Ghost: 0.0|Attribute missing
+VirtualTeam.score-Ghost: 0.0|Attribute missing
+PlayerStatistics.rebounds-Ghost: 0.0|Attribute missing
+Team.season-Ghost: 0.0|Attribute missing
+VirtualScore.playerScoreInMatch-Ghost: 0.0|Attribute missing
+VirtualTeam.ranking-Ghost: 0.0|Attribute missing
+Match.matchId-Ghost: 0.0|Attribute missing
+VirtualScore-Ghost: 0.0|Missing class
+PlayerStatistics-Ghost: 0.0|Missing class
+FantasyBasketball-Ghost: 0.0|Missing class
+VirtualTeam-Ghost: 0.0|Missing class
+Player: 2.0|Class Matched with Player
+Team: 2.0|Class Matched with Team
+Match: 2.0|Class Matched with Match
+licenseID: 1.0|Attribute Match With Player.licenseId Matched
+lastName: 1.0|Attribute Match With Player.lastName Matched
+teamName: 1.0|Attribute Match With Team.name Matched
+firstName: 1.0|Attribute Match With Player.firstName Matched
+homePoints: 1.0|Attribute Misplaced Match With PlayerStatistics.points Matched
+username: 1.0|Attribute Misplaced Match With VirtualTeam.name Matched
+match: 1.0|match Matched
+teams: 1.0|teams Matched
+team: 1.0|team Matched
+players: 1.0|players Matched
+------------------------------------------------
+Final result:16.0
+
+
+out/48.cdm
+Match.season-Ghost: 0.0|Attribute missing
+VirtualTeam.score-Ghost: 0.0|Attribute missing
+VirtualScore.playerScoreInMatch-Ghost: 0.0|Attribute missing
+VirtualTeam.ranking-Ghost: 0.0|Attribute missing
+Match.matchId-Ghost: 0.0|Attribute missing
+VirtualTeam-Ghost: 0.0|Missing class
+Match: 2.0|Class Matched with Match
+BasketBallCompetition: 2.0|Class Matched with FantasyBasketball
+TeamScore: 2.0|Class Matched with VirtualScore
+VirtualTeam: 2.0|Class Matched with Team
+Player: 4.0|Matched Class for Player&PlayerStatistics: 
+licenseID: 1.0|Attribute Match With Player.licenseId Matched
+name: 1.0|Attribute Match With Team.name Matched
+firstName: 1.0|Attribute Match With Player.firstName Matched
+lastName: 1.0|Attribute Match With Player.lastName Matched
+numberOfAssists: 1.0|Attribute Misplaced Match With PlayerStatistics.assists Matched
+numberOfPoints: 1.0|Attribute Misplaced Match With PlayerStatistics.points Matched
+numberOfRebounds: 1.0|Attribute Misplaced Match With PlayerStatistics.rebounds Matched
+nBASeason: 1.0|Attribute Misplaced Match With Team.season Matched
+username: 1.0|Attribute Misplaced Match With VirtualTeam.name Matched
+virtualTeams: 1.0|virtualTeams Matched
+basketBallCompetitions: 1.0|basketBallCompetitions Matched
+players: 1.0|players Matched
+basketBallCompetitions: 1.0|basketBallCompetitions Matched
+matchs: 1.0|matchs Matched
+basketBallCompetition: 1.0|basketBallCompetition Matched
+matchs: 1.0|matchs Matched
+winnerTeam: 1.0|winnerTeam Matched
+virtualTeams: 1.0|virtualTeams Matched
+players: 1.0|players Matched
+------------------------------------------------
+Final result:31.0
+

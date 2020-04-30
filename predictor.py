@@ -19,7 +19,7 @@ from typing import List
 
 CSV_FILE = "data/grading.csv"
 
-AUC_OUTPUT_LOC = "figures/"
+AUC_OUTPUT_LOC = "figures/auc/"
 
 K = 10  # The 'k' for k-fold cross validation
 
@@ -174,7 +174,7 @@ def print_results():
 
 def print_importances():
     print(classifiers[0].coef_)
-    # print(classifiers[1].coef_)
+    print(classifiers[1].theta_, classifiers[1].sigma_)
     print(classifiers[2].feature_importances_)
     # print(classifiers[3])
     print(classifiers[4].feature_importances_)
