@@ -128,6 +128,60 @@ def get_class_layouts(n: int) -> str:
       </value>""","""
       <value key="//@classes.18">
         <value x="123.50012" y="57.96127"/>
+      </value>""","""
+      <value key="//@classes.19">
+        <value x="108.000122" y="305.08755"/>
+      </value>""","""
+      <value key="//@classes.20">
+        <value x="523.50012" y="257.96127"/>
+      </value>""","""
+      <value key="//@classes.21">
+        <value x="314.49994" y="617.9472"/>
+      </value>""","""
+      <value key="//@classes.22">
+        <value x="789.4182" y="522.07367"/>
+      </value>""","""
+      <value key="//@classes.23">
+        <value x="1173.9324" y="279.08759"/>
+      </value>""","""
+      <value key="//@classes.24">
+        <value x="1140.4558" y="553.92755"/>
+      </value>""","""
+      <value key="//@classes.25">
+        <value x="308.000122" y="505.08755"/>
+      </value>""","""
+      <value key="//@classes.26">
+        <value x="723.50012" y="457.96127"/>
+      </value>""","""
+      <value key="//@classes.27">
+        <value x="514.49994" y="817.9472"/>
+      </value>""","""
+      <value key="//@classes.28>
+        <value x="989.4182" y="722.07367"/>
+      </value>""","""
+      <value key="//@classes.29">
+        <value x="1373.9324" y="479.08759"/>
+      </value>""","""
+      <value key="//@classes.30">
+        <value x="1340.4558" y="843.92755"/>
+      </value>""","""
+      <value key="//@classes.31">
+        <value x="114.49994" y="417.9472"/>
+      </value>""","""
+      <value key="//@classes.32">
+        <value x="589.4182" y="322.07367"/>
+      </value>""","""
+      <value key="//@classes.33">
+        <value x="1173.9324" y="279.08759"/>
+      </value>""","""
+      <value key="//@classes.34">
+        <value x="840.4558" y="343.92755"/>
+      </value>""","""
+      <value key="//@classes.35">
+        <value x="158.000122" y="105.08755"/>
+      </value>""","""
+      <value key="//@classes.36">
+        <value x="223.50012" y="157.96127"/>
       </value>"""
     ]
 
@@ -244,16 +298,18 @@ def ecore2cdm(ecore: str) -> str:
                 if "ecore:EAttribute" in sf.attrib.values():
                     cdm_attr_node = etree.SubElement(cdm_class_node, "attributes")
                     cdm_attr_node.set("name", sf.attrib["name"])
-                    cdm_attr_node.set("type", TYPES.get(sf.attrib.get("eType"), "//@types.2"))
+                    cdm_attr_node.set("type", TYPES.get(sf.attrib.get("eType"), "//@types.1"))
                 if "ecore:EReference" in sf.attrib.values():
                     cdm_assoc_node = etree.SubElement(cdm_class_node, "associationEnds")
                     cdm_assoc_node.set("name", sf.attrib["name"])
                     # print(sf.attrib)
                     # print(i, clazz.name, clazz.associations)
-                    assoc = list(clazz.associations.values())[i]
-                    cdm_assoc_node.set("assoc", f"//@associations.{assoc.aid}")
-                    cdm_assoc_node.set("upperBound", "-1")  # TODO Handle multiplicities
-                    i += 1
+                    assoc_list = list(clazz.associations.values())
+                    if i < len(assoc_list):
+                        assoc = assoc_list[i]
+                        cdm_assoc_node.set("assoc", f"//@associations.{assoc.aid}")
+                        cdm_assoc_node.set("upperBound", "-1")  # TODO Handle multiplicities
+                        i += 1
 
             #print(etree.tostring(cdm_class_node))
             cdm_class_nodes[e.attrib["name"]] = cdm_class_node
@@ -300,31 +356,37 @@ def ecore2cdm(ecore: str) -> str:
     #     return ""
 
 
-def transform(files: List[str]):
-    for fn in files:
-        with open(fn) as f:
-            cdm = ecore2cdm(f.read())
-            with open("data/res2.cdm", "w") as g:
-                g.write(cdm)
+def transform_debug(filename: str):
+    with open(filename) as f:
+        cdm = ecore2cdm(f.read())
+        with open("data/res.cdm", "w") as g:
+            g.write(cdm)
 
 
-def transform2():
+def transform(ump_loc: str, out_loc: str):
     global aid
-    i = 0
-    for filename in os.listdir("dataset/umple_files"):
+    fails = []
+    for filename in os.listdir(ump_loc):
         aid = 0
         if filename.endswith(".ecore"):
             try:
-                with open(f"dataset/umple_files/{filename}") as f:
+                n = int(filename.replace(".ecore", ""))
+                with open(f"{ump_loc}/{filename}") as f:
                     cdm = ecore2cdm(f.read())
-                    with open(f"out/{i}.cdm", "w") as g:
-                        print(f"{i}.cdm <- {filename}")
+                    with open(f"{out_loc}/{n}.cdm", "w") as g:
+                        print(f"{n}.cdm <- {filename}")
                         g.write(cdm)
-                        i += 1
             except Exception as e:
+                fails.append(n)
                 print(f"\nFailed to transform {filename}, with {type(e)}:\n{e}\n")
+    
+    if fails:
+        print(f"{len(fails)} fails: {sorted(fails)}")
 
 
 if __name__ == "__main__":
-    #transform(["dataset/umple_files/assignment2.ecore"])
-    transform2()
+    #transform("dataset/umple_files", "out" + ".new")  # avoid overwriting
+
+    transform("final_data/ecore_files", "out_final")
+
+    #transform_debug("final_data/ecore_files/100.ecore")

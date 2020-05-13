@@ -17,9 +17,9 @@ from sklearn.tree import DecisionTreeClassifier
 from typing import List
 
 
-CSV_FILE = "data/grading.csv"
+CSV_FILE = "data/grading_tmp.csv"
 
-AUC_OUTPUT_LOC = "figures/auc/"
+AUC_OUTPUT_LOC = "figures/auc_final/"
 
 K = 10  # The 'k' for k-fold cross validation
 
@@ -49,7 +49,7 @@ def get_data_from_csv():
     return np.array(result)
 
 
-data = get_data_from_csv()  # 54 labeled submissions
+data = get_data_from_csv()  # labeled submissions
 
 
 def train_model(model, x_train, y_train):
@@ -83,11 +83,13 @@ def evaluate(model, x_test, y_test, data_name: str):
     if model_name not in output:
         output[model_name] = {
             "heuristic": {"expected": [], "predicted": []},
+            "touchcore": {"expected": [], "predicted": []},
             "heuristicAndTouchcore": {"expected": [], "predicted": []}
         }
     if model_name not in probas:
         probas[model_name] = {
             "heuristic": [],
+            "touchcore": [],
             "heuristicAndTouchcore": []
         }
 
@@ -116,18 +118,37 @@ def evaluate_all(training_data, test_data):
     for clf in classifiers:
         model = train_model(clf, x_train, y_train)
         evaluate(model, x_test, y_test, "heuristic")
-
-    # Predict label given heuristic and TC
+        
+    # Predict label given touchcore
     x_train = []
     y_train = []
     for e in training_data:
-        x_train.append(e[5:])
+        x_train.append(e[8:])
         y_train.append(e[1])
 
     x_test = []
     y_test = []
     for e in test_data:
-        x_test.append(e[5:])
+        x_test.append(e[8:])
+        y_test.append(e[1])
+
+    for clf in classifiers:
+        model = train_model(clf, x_train, y_train)
+        evaluate(model, x_test, y_test, "touchcore")
+
+    # Predict label given heuristic and TC
+    x_train = []
+    y_train = []
+    for e in training_data:
+        # x_train.append(e[5:])
+        x_train.append([e[5], e[7], e[9], e[10]])
+        y_train.append(e[1])
+
+    x_test = []
+    y_test = []
+    for e in test_data:
+        # x_test.append(e[5:])
+        x_test.append([e[5], e[7], e[9], e[10]])
         y_test.append(e[1])
 
     for clf in classifiers:
@@ -147,11 +168,11 @@ def print_results():
     # expected is always the same
     exp = output[type(classifiers[0]).__name__]["heuristic"]["expected"]
     preds: List[List[int]] = []
-    prbs = []
+    prbs: List[List[float]] = []
 
     for clf in classifiers:
         model_name = type(clf).__name__
-        for data_name in ["heuristic", "heuristicAndTouchcore"]:
+        for data_name in ["heuristic", "touchcore", "heuristicAndTouchcore"]:
             cols.append(f"{model_name}_{data_name}")
             preds.append(output[model_name][data_name]["predicted"])
             prbs.append(probas[model_name][data_name])
@@ -162,26 +183,31 @@ def print_results():
         for v in p:
             print(f"{v},", end="")
         print()
-
-    for c, p in zip(cols[1:], preds):
-        print(f"AUC of {c}: {roc_auc_score(exp, p)}")
     
     for clf in classifiers:
         model_name = type(clf).__name__
-        for data_name in ["heuristic", "heuristicAndTouchcore"]:
-            save_auc(f"{model_name}_{data_name}", exp, np.array(probas[model_name][data_name]))
+        for data_name in ["heuristic", "touchcore", "heuristicAndTouchcore"]:
+            n = f"{model_name}_{data_name}"
+            pred = np.array(probas[model_name][data_name])
+            print(f"AUC of {n}: {roc_auc_score(exp, np.transpose(pred)[1])}")
+            #save_auc(n, exp, pred)
 
+    # 0 LogisticRegression(C=1e5, max_iter=2000),
+    # 1 GaussianNB(var_smoothing=0.1),
+    # 2 RandomForestClassifier(),
+    # # 3 KNeighborsClassifier(n_neighbors=2),
+    # #4 DecisionTreeClassifier()
 
 def print_importances():
     print(classifiers[0].coef_)
     print(classifiers[1].theta_, classifiers[1].sigma_)
     print(classifiers[2].feature_importances_)
     # print(classifiers[3])
-    print(classifiers[4].feature_importances_)
+    # print(classifiers[4].feature_importances_)
 
 
 def save_auc(name, expected, predicted):
-    skplt.metrics.plot_roc(expected, predicted)
+    skplt.metrics.plot_roc(expected, predicted, title=f"{name.replace('_', ' ')} ROC Curves")
     plt.savefig(os.path.join(AUC_OUTPUT_LOC, f"{name}.png"), format="png")
 
 

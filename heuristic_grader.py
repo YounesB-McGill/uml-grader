@@ -1,28 +1,25 @@
 #!/usr/bin/env python3
 
+import json
+import re
 import os
-from typing import Dict, Tuple
+import pprint
 
-SUBMISSIONS_LOC = "dataset/umple_files"
+from collections import Counter
+from typing import Dict, List, Tuple
 
-N_CLASSES = 7
-N_ASSOC = 13
+MARKING_SCHEME_FILE = "data/smart_home_heuristic_marking_scheme.json"  # "data/fantasy_basketball_heuristic_marking_scheme.json"
+SUBMISSIONS_LOC = "final_data/umple_files"  # "dataset/umple_files"
 
-EXPECTED_CLASSES = [
-    ["FantasyBasketball"],
-    ["Match", "Game"],
-    ["Team", "RealTeam", "RTeam"],
-    ["VirtualTeam", "VTeam"],
-    ["Player", "NbaPlayer"],
-    ["PlayerStat", "Stat"],
-    ["VirtualScore", "VScore"],
-]
+BASIC_TYPES = ["Boolean", "boolean", "Integer", "int", "Float", "float", "Double", "double", "String"]
+UMPLE_KEYWORDS = ["class", "isA", "--", "association", "abstract"]
 
-EXPECTED_ATTRIBUTES = [
-    "season", "matchId", "season", "name", "score", "ranking", "name", "budget",
-    "first", "last", "id", "salary",
-    "points", "assists", "rebounds", "score",
-]
+FREQ_THRESH = 3  # Number of occurences required to consider a word 'frequent'
+
+frequent_extra_classes = Counter()
+frequent_extra_attributes = Counter()
+
+IDEAL_ASSOC_MULTS = []
 
 FILE_MAPPINGS = dict((v, k) for k, v in {
     "0.cdm": "0_ideal_solution.ump",
@@ -81,6 +78,8 @@ FILE_MAPPINGS = dict((v, k) for k, v in {
     "53.cdm": "9_BasketBall.ump",
 }.items())
 
+pp = pprint.PrettyPrinter(indent=2)
+
 
 def get_all_submissions() -> Dict[str, str]:
     result = {}
@@ -91,6 +90,45 @@ def get_all_submissions() -> Dict[str, str]:
     return result
 
 
+def get_probable_declared_classes(submission: str) -> List[str]:
+    result = []
+    submission = submission.replace("\t", "  ")
+    chunks = submission.split("class")
+    for c in chunks:
+        c = re.sub(r"[^A-Za-z0-9 ]+", "", c)
+        sc = c.split()
+        if sc:
+            result.append(sc[0].strip())
+    return result
+
+
+def get_probable_declared_attributes(submission: str) -> List[str]:
+    result = set()
+    submission_lines = submission.replace("\t", "  ").splitlines()
+    classes = get_probable_declared_classes(submission)
+    for line in submission_lines:
+        if not any(m in line for m in UMPLE_KEYWORDS):
+            words = re.sub(r"[^A-Za-z ]+", "", line).split()
+            for word in words:
+                if word not in classes and word not in BASIC_TYPES and word != "enum":
+                    result.add(word)
+    
+    return list(result)
+
+
+def get_association_multiplicities(umple_text: str, bidirectional=False) -> List[str]:
+    result = []
+    lines = umple_text.splitlines()
+    for line in lines:
+        if "--" in line:
+            line = "".join(c for c in line if not c.isalpha())
+            lhs, rhs = line.split("--")
+            result.append(f"{lhs.split()[-1]}--{rhs.split()[0]}")
+            if bidirectional:
+                result.append(f"{rhs.split()[0]}--{lhs.split()[-1]}")
+    return result
+
+
 def get_n_classes(submission: str) -> int:
     n = submission.count("class")
     if "//$?[End_of_model]$?" in submission:
@@ -98,57 +136,122 @@ def get_n_classes(submission: str) -> int:
     return n
 
 
-def get_n_assoc(submission: str) -> int:
+def get_n_assoc(submission: str, max_assoc: int) -> int:
     # assuming all associations are converted to bidirectional
-    return submission.count("--")
+    return min(max_assoc, submission.count("--"))
 
 
-def get_n_expected_classes(submission: str) -> int:
+def get_n_assoc_with_mult(submission: str, ideal_mult: List[str], max_assoc: int):
     result = 0
+
+    submission_assocs = get_association_multiplicities(submission)
+
+    for assoc in ideal_mult:
+        if assoc in submission_assocs:
+            result += 1
+            submission_assocs.remove(assoc)  # prevent double counting
+
+    return min(max_assoc, result)
+
+
+def get_n_expected_classes(submission: str, expected_classes: List[List[str]], max_classes: int,
+                           show_unmatched: bool=False) -> int:
+    global frequent_extra_classes
+    result = 0
+
+    probable_declared_classes = get_probable_declared_classes(submission)
+    unmatched_classes = []
+
     submission = submission.lower()
 
-    for class_group in EXPECTED_CLASSES:
+    for class_group in expected_classes:
+        matched = False
         for class_name in class_group:
             if class_name.lower() in submission:
+                matched = True
                 result += 1
+                submission.replace(class_name.lower(), "", 1)  # avoid double counting
+                if class_name in probable_declared_classes:
+                    probable_declared_classes.remove(class_name)
                 break
+        if not matched:
+            unmatched_classes.append(class_group[0])
 
-    return result
+    frequent_extra_classes.update(probable_declared_classes)
+
+    if show_unmatched and unmatched_classes:
+        print(f"""Could not find these classes:\n{unmatched_classes}\nBut found these classes instead:\n{
+               probable_declared_classes}\n""")
+
+    return min(result, max_classes)
 
 
-def get_n_expected_attributes(submission: str) -> int:
+def get_n_expected_attributes(submission: str, expected_attributes: List[str]) -> int:
+    global frequent_extra_attributes
     result = 0
+    probable_declared_attributes = get_probable_declared_attributes(submission)
     submission = submission.lower()
 
-    for attribute in EXPECTED_ATTRIBUTES:
+    for attribute in expected_attributes:
         if attribute.lower() in submission:
             result += 1
-            # print(f"Found expected attribute: {attribute}")
 
             # prevent double counting
             submission = submission.replace(attribute.lower(), "", 1)
 
-    return result
+            if attribute in probable_declared_attributes:
+                probable_declared_attributes.remove(attribute)
+
+    frequent_extra_attributes.update(probable_declared_attributes)
+
+    return min(result, len(expected_attributes))
     
 
-def grade_submission(submission: Tuple[str, str]):
+def grade_submission(submission: Tuple[str, str], marking_scheme: Dict):
     name, text = submission
-    if name not in FILE_MAPPINGS:
-        return
+    # if name not in FILE_MAPPINGS:
+    #     return
+
+    expected_classes = marking_scheme["expectedClasses"]
+    expected_attributes = marking_scheme["expectedAttributes"]
+    max_exp_classes = marking_scheme["nClasses"]
+    max_assoc = marking_scheme["nAssoc"]
+
+    file_mapping = int(name.replace(".ump", ""))  # FILE_MAPPINGS[name]
     
-    file_mapping = FILE_MAPPINGS[name]
-    n_classes = get_n_classes(text)
-    n_assoc = get_n_assoc(text)
-    n_exp_cls = get_n_expected_classes(text)
-    n_exp_attr = get_n_expected_attributes(text)
+    n_exp_cls = get_n_expected_classes(text, expected_classes, max_exp_classes, show_unmatched=False)
+    n_exp_attr = get_n_expected_attributes(text, expected_attributes)
+    n_assoc = get_n_assoc(text, max_assoc)
+    n_mult = get_n_assoc_with_mult(text, IDEAL_ASSOC_MULTS, max_assoc)
 
-    print(f"{file_mapping},{n_classes},{n_assoc},{n_exp_cls},{n_exp_attr}")
+    #print(f"{file_mapping},{n_exp_cls},{n_exp_attr},{n_assoc}")
+    return [file_mapping, n_exp_cls, n_exp_attr, n_assoc, n_mult]
 
 
-def grade_all_using_heuristic():
+def grade_all_using_heuristic(marking_scheme_file: str):
+    global IDEAL_ASSOC_MULTS
+    result = []
+
+    with open(marking_scheme_file) as f:
+        marking_scheme = json.load(f)
+
     submissions = get_all_submissions()
+    IDEAL_ASSOC_MULTS = get_association_multiplicities(submissions["0.ump"], bidirectional=True)
+    
     for s in submissions.items():
-        grade_submission(s)
+        result.append(grade_submission(s, marking_scheme))
+
+    result.sort(key=lambda x: x[0])
+
+    for r in result:
+        print(",".join(map(str, r)))
+
+    return result
+
+
+def show_most_frequent(ranking: Dict[str, int], thresh: int):
+    print(json.dumps({k: v for k, v in sorted(
+        {c: f for c, f in ranking.items() if f >= thresh}.items(), key=lambda item: -item[1])}, indent=2))
 
 
 def debug():
@@ -159,5 +262,14 @@ def debug():
 
 
 if __name__ == "__main__":
-    grade_all_using_heuristic()
-    #debug()
+    grade_all_using_heuristic(MARKING_SCHEME_FILE)
+    # show_most_frequent(frequent_extra_classes, FREQ_THRESH)
+    # show_most_frequent(frequent_extra_attributes, FREQ_THRESH)
+
+    # for i in range(0, 114):
+    #     with open(f"final_data/umple_files/{i}.ump", "r") as f:
+    #         text = f.read()
+    #         print(i)
+    #         print(get_association_multiplicities(text))
+    #         print()
+    

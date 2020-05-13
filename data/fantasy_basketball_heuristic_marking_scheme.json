@@ -1,0 +1,24 @@
+{
+  "name": "FantasyBasketball",
+
+  "nClasses": 6,
+  "nAssoc": 13,
+
+  "expectedClasses": [
+      ["FantasyBasketball"],
+      ["Match", "Game"],
+      ["Team", "RealTeam", "RTeam"],
+      ["VirtualTeam", "VTeam"],
+      ["Player", "NbaPlayer"],
+      ["PlayerStat", "Stat"],
+      ["VirtualScore", "VScore"]
+  ],
+
+  "expectedAttributes": [
+    "season", "matchId",
+    "season", "name",
+    "ranking", "name", "budget",
+    "first", "last", "id", "salary",
+    "points", "assists", "rebounds"
+  ]
+}

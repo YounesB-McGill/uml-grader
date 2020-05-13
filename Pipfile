@@ -16,6 +16,11 @@ sklearn = "*"
 ggplot = "*"
 scikit-plot = "*"
 matplotlib = "*"
+pyautogui = "*"
+xlrd = "*"
+openpyxl = "*"
+text-matcher = "*"
+scipy = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.8"
