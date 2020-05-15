@@ -1,0 +1,194 @@
+class SHAS{
+  1 shas<@>-1 SmartHome home;
+}
+class SmartHome{
+  1 home<@>-* SmartRoom rooms;
+  1 home<@>-* DeviceActivity activityLog;
+  String address;
+}
+class SmartRoom{
+  isA AtomicTermReference;
+  String name;
+  1 room<@>-* SmartDevice devices;
+}
+class DeviceActivity {
+  abstract;
+  String timestamp;
+}
+class SmartDevice {
+  abstract;
+  unique Integer id;
+}
+
+class Sensor {
+  isA SmartDevice;
+  isA AtomicTermReference;
+  enum SensorType{TemperatureSensor,MovementSensor}
+  SensorType type;
+  Double readingTimeInterval;
+  1 sensor<@>-* SensorReading readings;
+}
+class Actuator {
+  isA SmartDevice;
+  isA AtomicTermReference;
+  enum ControllerType {LightController,LockController}
+  Double maxValue;
+  Double minValue;
+  ControllerType type;
+  1 sensor <@>-* ControlCommand commands;
+}
+class ControlCommand{
+  isA DeviceActivity;
+  isA AtomicTermReference;
+  enum CommandStatus{Requested,Completed,Failed}
+  CommandStatus status;
+  Double valueToAssign;
+}
+class SensorReading{
+  isA DeviceActivity;
+  isA AtomicTermReference;
+  Double readValue;
+}
+
+
+
+class TriggeredRule{
+  isA DeviceActivity;
+}
+class AutomationRule{
+  enum AutomationStatus{Activated,Deactivated}
+  AutomationStatus status;
+  
+  1 rule<@>-* TriggeredRule triggeredEvents;
+  1 rule<@>-1 Precondition precondition;
+  1 rule<@>-1 Action action;
+}
+class Action {
+  *->1..* ControlCommand commands;
+}
+class Precondition {
+  1<@>-0..1 RelationalTerm logicalTerm;
+}
+
+class RelationalTerm{abstract;}
+
+class CombinedTerm{
+  isA RelationalTerm;
+  enum BooleanOperator{
+    AND,
+    OR,
+    NOT
+  }
+  BooleanOperator operator;
+  1 combinedTerm <@>-0..2 RelationalTerm terms;
+  
+}
+class AtomicTerm{
+  isA RelationalTerm;
+  enum ComparisonOperator {
+    GreaterThan,
+    LessThan,
+    EqualTo,
+    NotEqualTo,
+    GreaterThanEqual,
+    LessThanEqual
+  }
+  ComparisonOperator condition;
+  Double targetValue;
+  String description;
+  *->1 AtomicTermReference reference;
+}
+interface AtomicTermReference{
+  Double getValue();
+}//$?[End_of_model]$?
+
+namespace -;
+
+
+class SHAS
+{
+  position 259 15 109 41;
+}
+
+class SmartHome
+{
+  position 246 123 127 58;
+  position.association SmartHome:home__SmartRoom:rooms 127,31 0,8;
+}
+
+class SmartRoom
+{
+  position 573 125 112 58;
+}
+
+class TriggeredRule
+{
+  position 53 245 109 41;
+}
+
+class Sensor
+{
+  position 697 384 217 75;
+  position.association Sensor:sensor__SensorReading:readings 0,34 148,4;
+}
+
+class Actuator
+{
+  position 942 368 161 92;
+}
+
+class ControlCommand
+{
+  position 416 417 187 75;
+}
+
+class SensorReading
+{
+  position 360 335 148 58;
+}
+
+class AutomationRule
+{
+  position 28 359 196 58;
+  position.association AutomationRule:rule__TriggeredRule:triggeredEvents 10,0 0,16;
+  position.association AutomationRule:rule__Precondition:precondition 45,58 11,0;
+}
+
+class Action
+{
+  position 146 459 109 41;
+  position.association Action__ControlCommand:commands 109,10 0,71;
+}
+
+class Precondition
+{
+  position 18 457 109 41;
+  position.association Precondition__RelationalTerm:logicalTerm 89,41 9,0;
+}
+
+class CombinedTerm
+{
+  position 13 637 204 75;
+  position.association CombinedTerm:combinedTerm__RelationalTerm:terms 68,0 9,56;
+}
+
+class DeviceActivity
+{
+  position 246 221 146 73;
+}
+
+class SmartDevice
+{
+  position 743 270 109 73;
+}
+
+class RelationalTerm
+{
+  position 172 542 109 56;
+}
+
+class AtomicTerm
+{
+  position.association AtomicTerm__AtomicTermReference:reference 234,6 135,0;
+  position 1 2 234 108;
+}
