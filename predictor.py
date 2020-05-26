@@ -9,7 +9,8 @@ import scikitplot as skplt
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import KFold
-from sklearn.metrics import accuracy_score, roc_auc_score, roc_curve
+from sklearn.metrics import (accuracy_score, f1_score, confusion_matrix, recall_score, precision_score,
+    roc_auc_score, roc_curve)
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -17,14 +18,21 @@ from sklearn.tree import DecisionTreeClassifier
 from typing import List
 
 
-CSV_FILE = "data/grading_tmp.csv"
+BINARY_CLASSIFY = False
+
+if BINARY_CLASSIFY:
+    CSV_FILE = "data/grading4.csv"
+    LABELS = [0, 1]
+else:
+    CSV_FILE = "data/LG_grading_a2_final.csv"
+    LABELS = [0, 1, 2, 3, 4]  # represent letter grades
 
 AUC_OUTPUT_LOC = "figures/auc_final/"
 
 K = 10  # The 'k' for k-fold cross validation
 
 classifiers = [
-    LogisticRegression(C=1e5, max_iter=2000),
+    LogisticRegression(C=1e5, max_iter=10000),
     GaussianNB(var_smoothing=0.1),
     RandomForestClassifier(),
     # Also gives same results for 3, 5, 7, 12
@@ -140,15 +148,15 @@ def evaluate_all(training_data, test_data):
     x_train = []
     y_train = []
     for e in training_data:
-        # x_train.append(e[5:])
-        x_train.append([e[5], e[7], e[9], e[10]])
+        x_train.append(e[5:])
+        # x_train.append([e[5], e[7], e[9], e[10]])
         y_train.append(e[1])
 
     x_test = []
     y_test = []
     for e in test_data:
-        # x_test.append(e[5:])
-        x_test.append([e[5], e[7], e[9], e[10]])
+        x_test.append(e[5:])
+        # x_test.append([e[5], e[7], e[9], e[10]])
         y_test.append(e[1])
 
     for clf in classifiers:
@@ -181,7 +189,7 @@ def print_results():
 
     for p in zip(exp, *preds):
         for v in p:
-            print(f"{v},", end="")
+            print(f"{'{:1.0f}'.format(v)},", end="")
         print()
     
     for clf in classifiers:
@@ -189,7 +197,13 @@ def print_results():
         for data_name in ["heuristic", "touchcore", "heuristicAndTouchcore"]:
             n = f"{model_name}_{data_name}"
             pred = np.array(probas[model_name][data_name])
-            print(f"AUC of {n}: {roc_auc_score(exp, np.transpose(pred)[1])}")
+
+            if BINARY_CLASSIFY:
+                pred = np.transpose(pred)[1]
+
+            auc = roc_auc_score(np.array(exp), pred, multi_class='ovr')
+            #print(f"AUC of {n}: {auc}")
+            print(make_confusion_matrix(n, exp, output[model_name][data_name]["predicted"], auc, LABELS), "\n")
             #save_auc(n, exp, pred)
 
     # 0 LogisticRegression(C=1e5, max_iter=2000),
@@ -199,6 +213,7 @@ def print_results():
     # #4 DecisionTreeClassifier()
 
 def print_importances():
+    print("Importances of LogisticRegression, GaussianNB, and RandomForestClassifier")
     print(classifiers[0].coef_)
     print(classifiers[1].theta_, classifiers[1].sigma_)
     print(classifiers[2].feature_importances_)
@@ -209,6 +224,37 @@ def print_importances():
 def save_auc(name, expected, predicted):
     skplt.metrics.plot_roc(expected, predicted, title=f"{name.replace('_', ' ')} ROC Curves")
     plt.savefig(os.path.join(AUC_OUTPUT_LOC, f"{name}.png"), format="png")
+
+
+def make_confusion_matrix(n, y_true, y_pred, auc, labels):
+    labels = [*labels, 0]
+    cm = np.array(confusion_matrix(y_true, y_pred))
+
+    cm = np.r_[cm, [np.sum(cm, axis=0)]]
+    cm = np.c_[cm, np.sum(cm, axis=1)]
+
+    cm = np.r_[[labels], cm]
+    cm = np.c_[[0, *labels], cm]
+
+    result = n + "\n"
+    for row in cm:
+        result += f"{','.join(list(map(str, row)))}\n"
+
+    if BINARY_CLASSIFY:
+        avg = "binary"
+    else:
+        avg = "macro"  # micro is same as average
+
+    m = 100  # to make publishing data easier
+    f = "{:2.2f}"
+
+    result += (f"Accuracy,{f.format(m * accuracy_score(y_true, y_pred))}\n"
+               f"Precision,{f.format(m * precision_score(y_true, y_pred, average=avg, zero_division=0))}\n"
+               f"Recall,{f.format(m * recall_score(y_true, y_pred, average=avg))}\n"
+               f"F1,{f.format(m * f1_score(y_true, y_pred, average=avg))}\n"
+               f"AUC,{f.format(m * auc)}\n")
+
+    return result
 
 
 def debug():
