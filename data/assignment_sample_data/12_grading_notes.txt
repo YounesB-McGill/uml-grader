@@ -1,0 +1,25 @@
+Grade calculation (all grades are %)
+
+Classes, 22
+Attributes, 28.67 
+Associations, 24.33
+
+Total, 75
+
+
+Feedback:
+
+Classes:
+- Missing classes: Team, VirtualStatistics
+
+Attributes:
+- Missing season (in Match and in Team), matchId
+- Player should not have score attribute.
+- RealTeam cannot be attribute of Player
+
+Associations:
+- Missing second association between Match and VirtualTeam
+- Missing second association between Player and VirtualTeam
+- Wrong multiplicity for Player -- VirtualTeam
+- Wrong multiplicity for User -- VirtualTeam
+

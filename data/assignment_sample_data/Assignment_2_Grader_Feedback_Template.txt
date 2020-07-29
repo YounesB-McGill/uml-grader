@@ -1,0 +1,28 @@
+Total Marks /100
+
+PART 1: /70
+Functionality: 50 
+- Classes: 10
+- Attributes: 10
+- Associations: 10
+- Containment: 10
+- Multiplicities: 10
+
+Correct style and no anti-patterns: 20
+Some examples:
+-2 misuse of generalization
+-3 X is a use case and not a domain class
+-1 strange naming (of classes, attributes, associations)
+-2 use of attribute instead of an association
+-1 more than one manager class
+-1 missing top-level class
+
+PART 2: /10
+-1 for each inconsistency
+
+PART 3: /10
+-1 for each missing class
+-1 for each compilation error
+
+PART 4: /10
+-1 for each missing class 
