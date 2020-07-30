@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ASCII"?>
+<classdiagram:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classdiagram="http://cs.mcgill.ca/sel/cdm/1.0" name="model">
+  
+  <classes xsi:type="classdiagram:Class" name="FBGS"><associationEnds name="competitions" assoc="//@associations.0" upperBound="-1"/><associationEnds name="users" assoc="//@associations.1" upperBound="-1"/><associationEnds name="players" assoc="//@associations.2" upperBound="-1"/><associationEnds name="virtualTeams" assoc="//@associations.3" upperBound="-1"/><associationEnds name="matchs" assoc="//@associations.4" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="Competition"><attributes name="ranking" type="//@types.6"/><attributes name="nbaSeason" type="//@types.4"/><associationEnds name="fBGS" assoc="//@associations.0" upperBound="-1"/><associationEnds name="virtualTeams" assoc="//@associations.5" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="User"><attributes name="name" type="//@types.6"/><attributes name="userId" type="//@types.4"/><attributes name="password" type="//@types.6"/><associationEnds name="fBGS" assoc="//@associations.1" upperBound="-1"/><associationEnds name="virtualTeams" assoc="//@associations.8" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="Player"><attributes name="licenseId" type="//@types.6"/><attributes name="firstName" type="//@types.6"/><attributes name="lastName" type="//@types.6"/><attributes name="salary" type="//@types.4"/><attributes name="realTeam" type="//@types.6"/><attributes name="points" type="//@types.4"/><attributes name="assists" type="//@types.4"/><attributes name="rebounds" type="//@types.4"/><attributes name="score" type="//@types.4"/><associationEnds name="fBGS" assoc="//@associations.2" upperBound="-1"/><associationEnds name="virtualTeams" assoc="//@associations.6" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="VirtualTeam"><attributes name="name" type="//@types.6"/><attributes name="budget" type="//@types.4"/><attributes name="score" type="//@types.4"/><associationEnds name="lineup" assoc="//@associations.3" upperBound="-1"/><associationEnds name="bench" assoc="//@associations.5" upperBound="-1"/><associationEnds name="fBGS" assoc="//@associations.6" upperBound="-1"/><associationEnds name="competition" assoc="//@associations.7" upperBound="-1"/><associationEnds name="users" assoc="//@associations.8" upperBound="-1"/><associationEnds name="players" assoc="//@associations.9" upperBound="-1"/><associationEnds name="matchs" assoc="//@associations.10" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="Match"><associationEnds name="winner" assoc="//@associations.4" upperBound="-1"/><associationEnds name="fBGS" assoc="//@associations.10" upperBound="-1"/><associationEnds name="virtualTeams" assoc="//@associations.11" upperBound="-1"/></classes>
+
+  <types xsi:type="classdiagram:CDVoid"/>
+  <types xsi:type="classdiagram:CDAny"/>
+  <types xsi:type="classdiagram:CDBoolean"/>
+  <types xsi:type="classdiagram:CDDouble"/>
+  <types xsi:type="classdiagram:CDInt"/>
+  <types xsi:type="classdiagram:CDLong"/>
+  <types xsi:type="classdiagram:CDString"/>
+  <types xsi:type="classdiagram:CDByte"/>
+  <types xsi:type="classdiagram:CDFloat"/>
+  <types xsi:type="classdiagram:CDChar"/>
+  <associations name="FBGS_Competition" ends="//@classes.0/@associationEnds.0 //@classes.1/@associationEnds.0"/>
+<associations name="FBGS_User" ends="//@classes.0/@associationEnds.1 //@classes.2/@associationEnds.0"/>
+<associations name="FBGS_Player" ends="//@classes.0/@associationEnds.2 //@classes.3/@associationEnds.0"/>
+<associations name="FBGS_VirtualTeam" ends="//@classes.0/@associationEnds.3 //@classes.4/@associationEnds.0"/>
+<associations name="FBGS_Match" ends="//@classes.0/@associationEnds.4 //@classes.5/@associationEnds.0"/>
+<associations name="Competition_VirtualTeam" ends="//@classes.1/@associationEnds.1 //@classes.4/@associationEnds.1"/>
+<associations name="VirtualTeam_Player" ends="//@classes.4/@associationEnds.2 //@classes.3/@associationEnds.1"/>
+<associations name="VirtualTeam_Player" ends="//@classes.4/@associationEnds.3 //@classes.3/@associationEnds.2"/>
+<associations name="VirtualTeam_User" ends="//@classes.4/@associationEnds.4 //@classes.2/@associationEnds.1"/>
+<associations name="VirtualTeam_Player" ends="//@classes.4/@associationEnds.5 //@classes.3/@associationEnds.3"/>
+<associations name="VirtualTeam_Match" ends="//@classes.4/@associationEnds.6 //@classes.5/@associationEnds.1"/>
+<associations name="Match_VirtualTeam" ends="//@classes.5/@associationEnds.2 //@classes.4/@associationEnds.7"/>
+  <layout>
+    <containers key="/">
+            <value key="//@classes.0">
+        <value x="668.4416" y="48.999725"/>
+      </value>
+      <value key="//@classes.1">
+        <value x="8.000122" y="205.08755"/>
+      </value>
+      <value key="//@classes.2">
+        <value x="423.50012" y="157.96127"/>
+      </value>
+      <value key="//@classes.3">
+        <value x="214.49994" y="517.9472"/>
+      </value>
+      <value key="//@classes.4">
+        <value x="689.4182" y="422.07367"/>
+      </value>
+      <value key="//@classes.5">
+        <value x="1073.9324" y="179.08759"/>
+      </value>    </containers>
+  </layout>
+</classdiagram:ClassDiagram>

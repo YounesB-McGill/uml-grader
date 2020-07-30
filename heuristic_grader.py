@@ -4,11 +4,18 @@ import json
 import re
 import os
 import pprint
+import sys
 
 from collections import Counter
 from typing import Dict, List, Tuple
 
-MARKING_SCHEME_FILE = "data/smart_home_heuristic_marking_scheme.json"  # "data/fantasy_basketball_heuristic_marking_scheme.json"
+
+if len(sys.argv) < 2:
+    print("Usage: ./heuristic_grader.py marking_scheme.json umple_files_dir [showExtras]")
+    exit(-1)
+
+
+MARKING_SCHEME_FILE = sys.argv[1]
 SUBMISSIONS_LOC = "final_data/umple_files"  # "dataset/umple_files"
 
 BASIC_TYPES = ["Boolean", "boolean", "Integer", "int", "Float", "float", "Double", "double", "String"]
@@ -81,11 +88,13 @@ FILE_MAPPINGS = dict((v, k) for k, v in {
 pp = pprint.PrettyPrinter(indent=2)
 
 
-def get_all_submissions() -> Dict[str, str]:
+def get_all_submissions(path=None) -> Dict[str, str]:
+    if path is None:
+        path = SUBMISSIONS_LOC
     result = {}
-    for filename in os.listdir(SUBMISSIONS_LOC):
+    for filename in os.listdir(path):
         if filename.endswith(".ump"):
-            with open(os.path.join(SUBMISSIONS_LOC, filename), "r") as f:
+            with open(os.path.join(path, filename), "r") as f:
                 result[filename] = f.read()
     return result
 
@@ -228,14 +237,14 @@ def grade_submission(submission: Tuple[str, str], marking_scheme: Dict):
     return [file_mapping, n_exp_cls, n_exp_attr, n_assoc, n_mult]
 
 
-def grade_all_using_heuristic(marking_scheme_file: str):
+def grade_all_using_heuristic(marking_scheme_file: str, submission_path: str=None):
     global IDEAL_ASSOC_MULTS
     result = []
 
     with open(marking_scheme_file) as f:
         marking_scheme = json.load(f)
 
-    submissions = get_all_submissions()
+    submissions = get_all_submissions(submission_path)
     IDEAL_ASSOC_MULTS = get_association_multiplicities(submissions["0.ump"], bidirectional=True)
     
     for s in submissions.items():
@@ -262,14 +271,9 @@ def debug():
 
 
 if __name__ == "__main__":
-    grade_all_using_heuristic(MARKING_SCHEME_FILE)
-    # show_most_frequent(frequent_extra_classes, FREQ_THRESH)
-    # show_most_frequent(frequent_extra_attributes, FREQ_THRESH)
+    "Main entry point."
+    grade_all_using_heuristic(MARKING_SCHEME_FILE, sys.argv[2])
 
-    # for i in range(0, 114):
-    #     with open(f"final_data/umple_files/{i}.ump", "r") as f:
-    #         text = f.read()
-    #         print(i)
-    #         print(get_association_multiplicities(text))
-    #         print()
-    
+    if len(sys.argv) > 3 and "showextras" in sys.argv[3].lower():
+        show_most_frequent(frequent_extra_classes, FREQ_THRESH)
+        show_most_frequent(frequent_extra_attributes, FREQ_THRESH)    

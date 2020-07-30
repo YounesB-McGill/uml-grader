@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="ASCII"?>
+<classdiagram:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classdiagram="http://cs.mcgill.ca/sel/cdm/1.0" name="0_Final_Exam_Ideal_Solution">
+  <classes xsi:type="classdiagram:Class" name="SHAS"><associationEnds name="smartHome" assoc="//@associations.0" upperBound="-1"/><associationEnds name="users" assoc="//@associations.1" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="SmartHome"><associationEnds name="sHAS" assoc="//@associations.0" upperBound="-1"/><associationEnds name="address" assoc="//@associations.2" upperBound="-1"/><associationEnds name="rooms" assoc="//@associations.3" upperBound="-1"/><associationEnds name="log" assoc="//@associations.4" upperBound="-1"/><associationEnds name="rules" assoc="//@associations.5" upperBound="-1"/><associationEnds name="owners" assoc="//@associations.6" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="User"><attributes name="name" type="//@types.6"/><associationEnds name="sHAS" assoc="//@associations.1" upperBound="-1"/><associationEnds name="smartHomes" assoc="//@associations.6" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="Address"><attributes name="city" type="//@types.6"/><attributes name="postalCode" type="//@types.6"/><attributes name="street" type="//@types.6"/><attributes name="aptNumber" type="//@types.6"/><associationEnds name="smartHome" assoc="//@associations.2" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="Room"><associationEnds name="smartHome" assoc="//@associations.3" upperBound="-1"/><associationEnds name="sensors" assoc="//@associations.7" upperBound="-1"/><associationEnds name="actuators" assoc="//@associations.8" upperBound="-1"/><associationEnds name="relationalTerms" assoc="//@associations.9" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="ActivityLog"><associationEnds name="smartHome" assoc="//@associations.4" upperBound="-1"/><associationEnds name="recordedReadings" assoc="//@associations.14" upperBound="-1"/><associationEnds name="recordedCommands" assoc="//@associations.15" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="AlertRule"><attributes name="ruleStatus" type="//@types.1"/><associationEnds name="smartHome" assoc="//@associations.5" upperBound="-1"/><associationEnds name="precondition" assoc="//@associations.19" upperBound="-1"/><associationEnds name="actions" assoc="//@associations.20" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="SensorDevice"><associationEnds name="room" assoc="//@associations.7" upperBound="-1"/><associationEnds name="sensorReadings" assoc="//@associations.10" upperBound="-1"/><associationEnds name="relationalTerms" assoc="//@associations.11" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="ActuatorDevice"><associationEnds name="room" assoc="//@associations.8" upperBound="-1"/><associationEnds name="controlCommands" assoc="//@associations.12" upperBound="-1"/><associationEnds name="relationalTerms" assoc="//@associations.13" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="RelationalTerm"><associationEnds name="room" assoc="//@associations.9" upperBound="-1"/><associationEnds name="sensor" assoc="//@associations.11" upperBound="-1"/><associationEnds name="actuator" assoc="//@associations.13" upperBound="-1"/><associationEnds name="sensorReading" assoc="//@associations.16" upperBound="-1"/><associationEnds name="controlCommand" assoc="//@associations.17" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="Device"><attributes name="deviceStatus" type="//@types.1"/><attributes name="deviceID" type="//@types.4"/></classes>
+<classes xsi:type="classdiagram:Class" name="SensorReading"><attributes name="value" type="//@types.3"/><associationEnds name="sensor" assoc="//@associations.10" upperBound="-1"/><associationEnds name="activityLog" assoc="//@associations.14" upperBound="-1"/><associationEnds name="relationalTerms" assoc="//@associations.16" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="ControlCommand"><attributes name="commandType" type="//@types.1"/><attributes name="commandStatus" type="//@types.1"/><associationEnds name="actuator" assoc="//@associations.12" upperBound="-1"/><associationEnds name="activityLog" assoc="//@associations.15" upperBound="-1"/><associationEnds name="relationalTerms" assoc="//@associations.17" upperBound="-1"/><associationEnds name="commandSequence" assoc="//@associations.18" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="RuntimeElement"><attributes name="timestamp" type="//@types.1"/></classes>
+<classes xsi:type="classdiagram:Class" name="CommandSequence"><associationEnds name="command" assoc="//@associations.18" upperBound="-1"/><associationEnds name="alertRule" assoc="//@associations.20" upperBound="-1"/><associationEnds name="commandSequences" assoc="//@associations.24" upperBound="-1"/><associationEnds name="nextCommand"/></classes>
+<classes xsi:type="classdiagram:Class" name="BooleanExpression"><associationEnds name="alertRule" assoc="//@associations.19" upperBound="-1"/><associationEnds name="notExpression" assoc="//@associations.21" upperBound="-1"/><associationEnds name="left" assoc="//@associations.22" upperBound="-1"/><associationEnds name="right" assoc="//@associations.23" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="NotExpression"><associationEnds name="expression" assoc="//@associations.21" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="BinaryExpression"><attributes name="operator" type="//@types.1"/><associationEnds name="leftExpr" assoc="//@associations.22" upperBound="-1"/><associationEnds name="rightExpr" assoc="//@associations.23" upperBound="-1"/></classes>
+
+  <types xsi:type="classdiagram:CDVoid"/>
+  <types xsi:type="classdiagram:CDAny"/>
+  <types xsi:type="classdiagram:CDBoolean"/>
+  <types xsi:type="classdiagram:CDDouble"/>
+  <types xsi:type="classdiagram:CDInt"/>
+  <types xsi:type="classdiagram:CDLong"/>
+  <types xsi:type="classdiagram:CDString"/>
+  <types xsi:type="classdiagram:CDByte"/>
+  <types xsi:type="classdiagram:CDFloat"/>
+  <types xsi:type="classdiagram:CDChar"/>
+  <associations name="SHAS_SmartHome" ends="//@classes.0/@associationEnds.0 //@classes.1/@associationEnds.0"/>
+<associations name="SHAS_User" ends="//@classes.0/@associationEnds.1 //@classes.2/@associationEnds.0"/>
+<associations name="SmartHome_Address" ends="//@classes.1/@associationEnds.1 //@classes.3/@associationEnds.0"/>
+<associations name="SmartHome_Room" ends="//@classes.1/@associationEnds.2 //@classes.4/@associationEnds.0"/>
+<associations name="SmartHome_ActivityLog" ends="//@classes.1/@associationEnds.3 //@classes.5/@associationEnds.0"/>
+<associations name="SmartHome_AlertRule" ends="//@classes.1/@associationEnds.4 //@classes.6/@associationEnds.0"/>
+<associations name="SmartHome_User" ends="//@classes.1/@associationEnds.5 //@classes.2/@associationEnds.1"/>
+<associations name="Room_SensorDevice" ends="//@classes.4/@associationEnds.1 //@classes.7/@associationEnds.0"/>
+<associations name="Room_ActuatorDevice" ends="//@classes.4/@associationEnds.2 //@classes.8/@associationEnds.0"/>
+<associations name="Room_RelationalTerm" ends="//@classes.4/@associationEnds.3 //@classes.9/@associationEnds.0"/>
+<associations name="SensorDevice_SensorReading" ends="//@classes.7/@associationEnds.1 //@classes.11/@associationEnds.0"/>
+<associations name="SensorDevice_RelationalTerm" ends="//@classes.7/@associationEnds.2 //@classes.9/@associationEnds.1"/>
+<associations name="ActuatorDevice_ControlCommand" ends="//@classes.8/@associationEnds.1 //@classes.12/@associationEnds.0"/>
+<associations name="ActuatorDevice_RelationalTerm" ends="//@classes.8/@associationEnds.2 //@classes.9/@associationEnds.2"/>
+<associations name="ActivityLog_SensorReading" ends="//@classes.5/@associationEnds.1 //@classes.11/@associationEnds.1"/>
+<associations name="ActivityLog_ControlCommand" ends="//@classes.5/@associationEnds.2 //@classes.12/@associationEnds.1"/>
+<associations name="SensorReading_RelationalTerm" ends="//@classes.11/@associationEnds.2 //@classes.9/@associationEnds.3"/>
+<associations name="ControlCommand_RelationalTerm" ends="//@classes.12/@associationEnds.2 //@classes.9/@associationEnds.4"/>
+<associations name="ControlCommand_CommandSequence" ends="//@classes.12/@associationEnds.3 //@classes.14/@associationEnds.0"/>
+<associations name="AlertRule_BooleanExpression" ends="//@classes.6/@associationEnds.1 //@classes.15/@associationEnds.0"/>
+<associations name="AlertRule_CommandSequence" ends="//@classes.6/@associationEnds.2 //@classes.14/@associationEnds.1"/>
+<associations name="BooleanExpression_NotExpression" ends="//@classes.15/@associationEnds.1 //@classes.16/@associationEnds.0"/>
+<associations name="BooleanExpression_BinaryExpression" ends="//@classes.15/@associationEnds.2 //@classes.17/@associationEnds.0"/>
+<associations name="BooleanExpression_BinaryExpression" ends="//@classes.15/@associationEnds.3 //@classes.17/@associationEnds.1"/>
+<associations name="CommandSequence_CommandSequence" ends="//@classes.14/@associationEnds.2 //@classes.14/@associationEnds.2"/>
+  <layout>
+    <containers key="/">
+            <value key="//@classes.0">
+        <value x="668.4416" y="48.999725"/>
+      </value>
+      <value key="//@classes.1">
+        <value x="8.000122" y="205.08755"/>
+      </value>
+      <value key="//@classes.2">
+        <value x="423.50012" y="157.96127"/>
+      </value>
+      <value key="//@classes.3">
+        <value x="214.49994" y="517.9472"/>
+      </value>
+      <value key="//@classes.4">
+        <value x="689.4182" y="422.07367"/>
+      </value>
+      <value key="//@classes.5">
+        <value x="1073.9324" y="179.08759"/>
+      </value>
+      <value key="//@classes.6">
+        <value x="1040.4558" y="543.92755"/>
+      </value>
+      <value key="//@classes.7">
+        <value x="208.000122" y="405.08755"/>
+      </value>
+      <value key="//@classes.8">
+        <value x="623.50012" y="357.96127"/>
+      </value>
+      <value key="//@classes.9">
+        <value x="414.49994" y="717.9472"/>
+      </value>
+      <value key="//@classes.10">
+        <value x="889.4182" y="622.07367"/>
+      </value>
+      <value key="//@classes.11">
+        <value x="1273.9324" y="379.08759"/>
+      </value>
+      <value key="//@classes.12">
+        <value x="1240.4558" y="743.92755"/>
+      </value>
+      <value key="//@classes.13">
+        <value x="14.49994" y="317.9472"/>
+      </value>
+      <value key="//@classes.14">
+        <value x="489.4182" y="222.07367"/>
+      </value>
+      <value key="//@classes.15">
+        <value x="1073.9324" y="179.08759"/>
+      </value>
+      <value key="//@classes.16">
+        <value x="740.4558" y="243.92755"/>
+      </value>
+      <value key="//@classes.17">
+        <value x="58.000122" y="5.08755"/>
+      </value>    </containers>
+  </layout>
+</classdiagram:ClassDiagram>

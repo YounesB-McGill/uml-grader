@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ASCII"?>
+<classdiagram:ClassDiagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classdiagram="http://cs.mcgill.ca/sel/cdm/1.0" name="6">
+  <classes xsi:type="classdiagram:Class" name="SHAS"><associationEnds name="home" assoc="//@associations.0" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="SmartHome"><attributes name="address" type="//@types.6"/><associationEnds name="shas" assoc="//@associations.0" upperBound="-1"/><associationEnds name="rooms" assoc="//@associations.1" upperBound="-1"/><associationEnds name="activityLog" assoc="//@associations.2" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="SmartRoom"><attributes name="name" type="//@types.6"/><associationEnds name="home" assoc="//@associations.1" upperBound="-1"/><associationEnds name="devices" assoc="//@associations.3" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="DeviceActivity"><attributes name="timestamp" type="//@types.6"/><associationEnds name="home" assoc="//@associations.2" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="SmartDevice"><attributes name="id" type="//@types.4"/><associationEnds name="room" assoc="//@associations.3" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="Sensor"><attributes name="type" type="//@types.1"/><attributes name="readingTimeInterval" type="//@types.3"/><associationEnds name="readings" assoc="//@associations.4" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="SensorReading"><attributes name="readValue" type="//@types.3"/><associationEnds name="sensor" assoc="//@associations.4" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="Actuator"><attributes name="maxValue" type="//@types.3"/><attributes name="minValue" type="//@types.3"/><attributes name="type" type="//@types.1"/><associationEnds name="commands" assoc="//@associations.5" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="ControlCommand"><attributes name="status" type="//@types.1"/><attributes name="valueToAssign" type="//@types.3"/><associationEnds name="sensor" assoc="//@associations.5" upperBound="-1"/><associationEnds name="actions" assoc="//@associations.6" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="Action"><associationEnds name="commands" assoc="//@associations.6" upperBound="-1"/><associationEnds name="rule" assoc="//@associations.9" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="TriggeredRule"><associationEnds name="rule" assoc="//@associations.7" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="AutomationRule"><attributes name="status" type="//@types.1"/><associationEnds name="triggeredEvents" assoc="//@associations.7" upperBound="-1"/><associationEnds name="precondition" assoc="//@associations.8" upperBound="-1"/><associationEnds name="action" assoc="//@associations.9" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="Precondition"><associationEnds name="rule" assoc="//@associations.8" upperBound="-1"/><associationEnds name="logicalTerm" assoc="//@associations.10" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="RelationalTerm"><associationEnds name="precondition" assoc="//@associations.10" upperBound="-1"/><associationEnds name="combinedTerm" assoc="//@associations.11" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="CombinedTerm"><attributes name="operator" type="//@types.1"/><associationEnds name="terms" assoc="//@associations.11" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="AtomicTerm"><attributes name="condition" type="//@types.1"/><attributes name="targetValue" type="//@types.3"/><attributes name="description" type="//@types.6"/><associationEnds name="reference" assoc="//@associations.12" upperBound="-1"/></classes>
+<classes xsi:type="classdiagram:Class" name="AtomicTermReference"><associationEnds name="atomicTerms" assoc="//@associations.12" upperBound="-1"/></classes>
+
+  <types xsi:type="classdiagram:CDVoid"/>
+  <types xsi:type="classdiagram:CDAny"/>
+  <types xsi:type="classdiagram:CDBoolean"/>
+  <types xsi:type="classdiagram:CDDouble"/>
+  <types xsi:type="classdiagram:CDInt"/>
+  <types xsi:type="classdiagram:CDLong"/>
+  <types xsi:type="classdiagram:CDString"/>
+  <types xsi:type="classdiagram:CDByte"/>
+  <types xsi:type="classdiagram:CDFloat"/>
+  <types xsi:type="classdiagram:CDChar"/>
+  <associations name="SHAS_SmartHome" ends="//@classes.0/@associationEnds.0 //@classes.1/@associationEnds.0"/>
+<associations name="SmartHome_SmartRoom" ends="//@classes.1/@associationEnds.1 //@classes.2/@associationEnds.0"/>
+<associations name="SmartHome_DeviceActivity" ends="//@classes.1/@associationEnds.2 //@classes.3/@associationEnds.0"/>
+<associations name="SmartRoom_SmartDevice" ends="//@classes.2/@associationEnds.1 //@classes.4/@associationEnds.0"/>
+<associations name="Sensor_SensorReading" ends="//@classes.5/@associationEnds.0 //@classes.6/@associationEnds.0"/>
+<associations name="Actuator_ControlCommand" ends="//@classes.7/@associationEnds.0 //@classes.8/@associationEnds.0"/>
+<associations name="ControlCommand_Action" ends="//@classes.8/@associationEnds.1 //@classes.9/@associationEnds.0"/>
+<associations name="TriggeredRule_AutomationRule" ends="//@classes.10/@associationEnds.0 //@classes.11/@associationEnds.0"/>
+<associations name="AutomationRule_Precondition" ends="//@classes.11/@associationEnds.1 //@classes.12/@associationEnds.0"/>
+<associations name="AutomationRule_Action" ends="//@classes.11/@associationEnds.2 //@classes.9/@associationEnds.1"/>
+<associations name="Precondition_RelationalTerm" ends="//@classes.12/@associationEnds.1 //@classes.13/@associationEnds.0"/>
+<associations name="RelationalTerm_CombinedTerm" ends="//@classes.13/@associationEnds.1 //@classes.14/@associationEnds.0"/>
+<associations name="AtomicTerm_AtomicTermReference" ends="//@classes.15/@associationEnds.0 //@classes.16/@associationEnds.0"/>
+  <layout>
+    <containers key="/">
+            <value key="//@classes.0">
+        <value x="668.4416" y="48.999725"/>
+      </value>
+      <value key="//@classes.1">
+        <value x="8.000122" y="205.08755"/>
+      </value>
+      <value key="//@classes.2">
+        <value x="423.50012" y="157.96127"/>
+      </value>
+      <value key="//@classes.3">
+        <value x="214.49994" y="517.9472"/>
+      </value>
+      <value key="//@classes.4">
+        <value x="689.4182" y="422.07367"/>
+      </value>
+      <value key="//@classes.5">
+        <value x="1073.9324" y="179.08759"/>
+      </value>
+      <value key="//@classes.6">
+        <value x="1040.4558" y="543.92755"/>
+      </value>
+      <value key="//@classes.7">
+        <value x="208.000122" y="405.08755"/>
+      </value>
+      <value key="//@classes.8">
+        <value x="623.50012" y="357.96127"/>
+      </value>
+      <value key="//@classes.9">
+        <value x="414.49994" y="717.9472"/>
+      </value>
+      <value key="//@classes.10">
+        <value x="889.4182" y="622.07367"/>
+      </value>
+      <value key="//@classes.11">
+        <value x="1273.9324" y="379.08759"/>
+      </value>
+      <value key="//@classes.12">
+        <value x="1240.4558" y="743.92755"/>
+      </value>
+      <value key="//@classes.13">
+        <value x="14.49994" y="317.9472"/>
+      </value>
+      <value key="//@classes.14">
+        <value x="489.4182" y="222.07367"/>
+      </value>
+      <value key="//@classes.15">
+        <value x="1073.9324" y="179.08759"/>
+      </value>
+      <value key="//@classes.16">
+        <value x="740.4558" y="243.92755"/>
+      </value>    </containers>
+  </layout>
+</classdiagram:ClassDiagram>

@@ -1,0 +1,123 @@
+ 
+class SHAS {
+	1 -- 0..* SmartHome smartHome;
+    1 -- * User users;	
+}
+
+ 
+class SmartHome {
+	1 -- 0..1 Address address;
+	1 -- 0..* Room rooms;		
+	1 -- 0..1 ActivityLog log;
+	1 -- 0..* AlertRule rules;
+	* -- * User owners;
+}
+
+ 
+class Address {
+	String city;
+	String postalCode;
+	String street;
+	String aptNumber;
+}
+
+class User {
+	String name;
+}
+
+class Room {
+	1 -- * SensorDevice sensors;
+	1 -- * ActuatorDevice actuators;
+}
+
+ 
+class Device {
+	abstract;
+	enum DeviceStatus { Activated, Deactivated };
+	DeviceStatus deviceStatus;
+	Integer deviceID;
+}
+
+ 
+class SensorDevice {
+	isA Device;
+}
+
+class ActuatorDevice {
+	isA Device;
+}
+
+ 
+class ActivityLog {
+	1 -- * SensorReading recordedReadings;
+	1 -- * ControlCommand recordedCommands;
+}
+
+ 
+class RuntimeElement {
+	abstract;
+	Time timestamp;
+}
+
+ 
+class SensorReading {
+	isA RuntimeElement;
+	Double value;
+	* -- 1 SensorDevice sensor;
+}
+
+ 
+ 
+class ControlCommand {
+	isA RuntimeElement;
+	enum CommandType {lockDoor, turnOnHeating};
+	CommandType commandType;
+	enum CommandStatus {Requested, Completed, Failed};
+	CommandStatus commandStatus;
+	* -- 1 ActuatorDevice actuator;
+}
+
+class AlertRule {
+	enum RuleStatus {created, edited, activated, deactivated };
+	RuleStatus ruleStatus;
+	1 -- 0..1 BooleanExpression precondition;
+	1 -- * CommandSequence actions;
+}
+
+ 
+class BooleanExpression {
+	abstract;
+}
+
+class RelationalTerm {
+	isA BooleanExpression;
+	* -- 0..1 Room room;
+	* -- 0..1 SensorDevice sensor;
+	* -- 0..1 ActuatorDevice actuator;
+	* -- 0..1 SensorReading sensorReading;
+	* -- 0..1 ControlCommand controlCommand;
+}
+
+
+ 
+class NotExpression {
+	isA BooleanExpression;
+	0..1 -- 1 BooleanExpression expression;	
+}
+
+ 
+ 
+ 
+class BinaryExpression {
+	isA BooleanExpression;
+	enum BinaryOp {AND, OR };
+	BinaryOp operator;
+	0..1 -- 1 BooleanExpression leftExpr;
+	0..1 -- 1 BooleanExpression rightExpr;
+}
+
+ 
+class CommandSequence {
+	* -- 0..1 CommandSequence nextCommand;
+	1 -- 0..1 ControlCommand command;
+}

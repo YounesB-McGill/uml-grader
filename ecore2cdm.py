@@ -2,6 +2,7 @@
 
 import re
 import os
+import sys
 from collections import OrderedDict
 from lxml import etree
 from typing import Dict, List
@@ -385,8 +386,9 @@ def transform(ump_loc: str, out_loc: str):
 
 
 if __name__ == "__main__":
-    #transform("dataset/umple_files", "out" + ".new")  # avoid overwriting
+    "Main entry point."
+    if len(sys.argv) > 2:
+        transform(sys.argv[1], sys.argv[2])
+    else:
+        print("Usage: ./ecore2cdm.py ecore_dir cdm_dir")
 
-    transform("final_data/ecore_files", "out_final")
-
-    #transform_debug("final_data/ecore_files/100.ecore")

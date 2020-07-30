@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="6" nsURI="" nsPrefix="6">
+  <eClassifiers xsi:type="ecore:EDataType" name="SensorType" instanceClassName="SensorType" />
+  <eClassifiers xsi:type="ecore:EDataType" name="ControllerType" instanceClassName="ControllerType" />
+  <eClassifiers xsi:type="ecore:EDataType" name="CommandStatus" instanceClassName="CommandStatus" />
+  <eClassifiers xsi:type="ecore:EDataType" name="AutomationStatus" instanceClassName="AutomationStatus" />
+  <eClassifiers xsi:type="ecore:EDataType" name="BooleanOperator" instanceClassName="BooleanOperator" />
+  <eClassifiers xsi:type="ecore:EDataType" name="ComparisonOperator" instanceClassName="ComparisonOperator" />
+  <eClassifiers xsi:type="ecore:EClass" name="SHAS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="home" lowerBound="1" eType="#//SmartHome" eOpposite="#//SmartHome/shas" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SmartHome">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="address" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="shas" lowerBound="1" eType="#//SHAS" eOpposite="#//SHAS/home" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rooms" upperBound="-1" eType="#//SmartRoom" eOpposite="#//SmartRoom/home" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activityLog" upperBound="-1" eType="#//DeviceActivity" eOpposite="#//DeviceActivity/home" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SmartRoom" eSuperTypes="#//AtomicTermReference">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="home" lowerBound="1" eType="#//SmartHome" eOpposite="#//SmartHome/rooms" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="devices" upperBound="-1" eType="#//SmartDevice" eOpposite="#//SmartDevice/room" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeviceActivity" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="home" lowerBound="1" eType="#//SmartHome" eOpposite="#//SmartHome/activityLog" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SmartDevice" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="room" lowerBound="1" eType="#//SmartRoom" eOpposite="#//SmartRoom/devices" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sensor" eSuperTypes="#//SmartDevice">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//SensorType" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readingTimeInterval" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="readings" upperBound="-1" eType="#//SensorReading" eOpposite="#//SensorReading/sensor" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Actuator" eSuperTypes="#//SmartDevice">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//ControllerType" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commands" upperBound="-1" eType="#//ControlCommand" eOpposite="#//ControlCommand/sensor" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ControlCommand" eSuperTypes="#//DeviceActivity">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//CommandStatus" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueToAssign" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sensor" lowerBound="1" eType="#//Actuator" eOpposite="#//Actuator/commands" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1" eType="#//Action" eOpposite="#//Action/commands" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SensorReading" eSuperTypes="#//DeviceActivity">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sensor" lowerBound="1" eType="#//Sensor" eOpposite="#//Sensor/readings" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TriggeredRule" eSuperTypes="#//DeviceActivity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rule" lowerBound="1" eType="#//AutomationRule" eOpposite="#//AutomationRule/triggeredEvents" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AutomationRule">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="#//AutomationStatus" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggeredEvents" upperBound="-1" eType="#//TriggeredRule" eOpposite="#//TriggeredRule/rule" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="precondition" lowerBound="1" eType="#//Precondition" eOpposite="#//Precondition/rule" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="action" lowerBound="1" eType="#//Action" eOpposite="#//Action/rule" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Action">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commands" lowerBound="1" upperBound="-1" eType="#//ControlCommand" eOpposite="#//ControlCommand/actions" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rule" lowerBound="1" eType="#//AutomationRule" eOpposite="#//AutomationRule/action" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Precondition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rule" lowerBound="1" eType="#//AutomationRule" eOpposite="#//AutomationRule/precondition" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="logicalTerm" eType="#//RelationalTerm" eOpposite="#//RelationalTerm/precondition" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelationalTerm" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="precondition" lowerBound="1" eType="#//Precondition" eOpposite="#//Precondition/logicalTerm" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="combinedTerm" lowerBound="1" eType="#//CombinedTerm" eOpposite="#//CombinedTerm/terms" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CombinedTerm" eSuperTypes="#//RelationalTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="#//BooleanOperator" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="terms" upperBound="2" eType="#//RelationalTerm" eOpposite="#//RelationalTerm/combinedTerm" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicTerm" eSuperTypes="#//RelationalTerm">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" eType="#//ComparisonOperator" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" />
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" />
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1" eType="#//AtomicTermReference" eOpposite="#//AtomicTermReference/atomicTerms" />
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AtomicTermReference">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="atomicTerms" upperBound="-1" eType="#//AtomicTerm" eOpposite="#//AtomicTerm/reference" />
+  </eClassifiers>
+</ecore:EPackage>

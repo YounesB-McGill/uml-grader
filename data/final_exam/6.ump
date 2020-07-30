@@ -1,0 +1,103 @@
+class SHAS{
+  1 shas--1 SmartHome home;
+}
+class SmartHome{
+  1 home--* SmartRoom rooms;
+  1 home--* DeviceActivity activityLog;
+  String address;
+}
+class SmartRoom{
+  isA AtomicTermReference;
+  String name;
+  1 room--* SmartDevice devices;
+}
+class DeviceActivity {
+  abstract;
+  String timestamp;
+}
+class SmartDevice {
+  abstract;
+  unique Integer id;
+}
+
+class Sensor {
+  isA SmartDevice;
+  isA AtomicTermReference;
+  enum SensorType{TemperatureSensor,MovementSensor}
+  SensorType type;
+  Double readingTimeInterval;
+  1 sensor--* SensorReading readings;
+}
+class Actuator {
+  isA SmartDevice;
+  isA AtomicTermReference;
+  enum ControllerType {LightController,LockController}
+  Double maxValue;
+  Double minValue;
+  ControllerType type;
+  1 sensor --* ControlCommand commands;
+}
+class ControlCommand{
+  isA DeviceActivity;
+  isA AtomicTermReference;
+  enum CommandStatus{Requested,Completed,Failed}
+  CommandStatus status;
+  Double valueToAssign;
+}
+class SensorReading{
+  isA DeviceActivity;
+  isA AtomicTermReference;
+  Double readValue;
+}
+
+
+
+class TriggeredRule{
+  isA DeviceActivity;
+}
+class AutomationRule{
+  enum AutomationStatus{Activated,Deactivated}
+  AutomationStatus status;
+  
+  1 rule--* TriggeredRule triggeredEvents;
+  1 rule--1 Precondition precondition;
+  1 rule--1 Action action;
+}
+class Action {
+  *--1..* ControlCommand commands;
+}
+class Precondition {
+  1--0..1 RelationalTerm logicalTerm;
+}
+
+class RelationalTerm{abstract;}
+
+class CombinedTerm{
+  isA RelationalTerm;
+  enum BooleanOperator{
+    AND,
+    OR,
+    NOT
+  }
+  BooleanOperator operator;
+  1 combinedTerm --0..2 RelationalTerm terms;
+  
+}
+class AtomicTerm{
+  isA RelationalTerm;
+  enum ComparisonOperator {
+    GreaterThan,
+    LessThan,
+    EqualTo,
+    NotEqualTo,
+    GreaterThanEqual,
+    LessThanEqual
+  }
+  ComparisonOperator condition;
+  Double targetValue;
+  String description;
+  *--1 AtomicTermReference reference;
+}
+class AtomicTermReference{
+  Double getValue();
+}
