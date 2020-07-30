@@ -1,0 +1,49 @@
+namespace ca.mcgill.ecse321.fantasy;
+
+class FantasyBasketball {
+  1 <@>- * Team teams;
+  1 <@>- * VirtualTeam virtualTeams;
+  1 <@>- * Match matches;
+  1 <@>- * Player players;
+}
+
+class Player {
+  firstName;
+  lastName;
+  Integer licenseId;
+}
+
+class Team {
+  Integer season;
+  name;
+  * teams -- * Player players;
+}
+
+class VirtualTeam {
+  * teamsAsStarter -- 0..5 Player starterPlayers;
+  * teamsOnBench -- 0..7 Player benchPlayers;
+  1 <@>- * VirtualScore virtualScores;
+  Integer score;
+  Integer ranking;
+  name;
+}
+
+class Match {
+  Integer season;
+  autounique matchId;
+  * homeMatches -- 0..1 Team homeTeam;
+  * awayMatches -- 0..1 Team awayTeam;
+  1 <@>- * PlayerStatistics playerStats;
+}
+
+class PlayerStatistics {
+  * -- 0..1 Player player;
+  Integer points;
+  Integer assists;
+  Integer rebounds;
+}
+
+class VirtualScore {
+  * -> 0..1 PlayerStatistics stat;
+  Integer playerScoreInMatch;
+}
