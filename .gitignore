@@ -9,3 +9,5 @@ data/assignment/build/
 data/final_exam/build/
 
 __pycache__/
+
+.vscode/settings.json
