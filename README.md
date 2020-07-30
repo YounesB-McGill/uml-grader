@@ -21,8 +21,8 @@ The following image shows the grading process used for this project.
 
 In this repository, we provide the following information:
 
-1. Example student [assignment](data/assignment_sample_data) and
-[final exam](data/final_exam_sample_data) submissions. We are unable to make 
+1. Example student [assignment](data/assignment) and
+[final exam](data/final_exam) submissions. We are unable to make 
 the entire datasets public due to copyright and ethics considerations.
 1. Data representing the [human grades](data/LG_grading_a2_final.csv), _i.e._,
 the ground truth, for the assignment and final exam.
@@ -77,7 +77,7 @@ SubmissionId,Classes,Attributes,Associations,Multiplicities
 ```
 
 If `showExtras` were run on a sufficiently large dataset, it would yield 
-results resembling what we obtained for extra classes and attributes, respectively:
+results resembling what we obtained for extra classes and attributes, respectively (only top results shown here):
 
 ```json
 {
@@ -87,7 +87,6 @@ results resembling what we obtained for extra classes and attributes, respective
   "Alert": 25,
   "Owner": 21,
   "Command": 20,
-  ...
 }
 {
   "address": 78,
@@ -96,7 +95,6 @@ results resembling what we obtained for extra classes and attributes, respective
   "Time": 46,
   "Completed": 46,
   "Failed": 45,
-  ...
 }
 ```
 
