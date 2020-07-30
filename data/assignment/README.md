@@ -2,7 +2,7 @@
 
 ## About assignment
 
-This assignment was for the [Winter 2017](https://github.com/ECSE321-Winter2017-McGill)
+This was the second assignment for the [Winter 2017](https://github.com/ECSE321-Winter2017-McGill)
 edition of ECSE321 Introduction to Software Engineering course taught at
 [McGill University](https://mcgill.ca/). The instructor was [Prof. Dániel Varró](https://github.com/varrodan).
 

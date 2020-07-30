@@ -6,7 +6,7 @@ import numpy as np
 from scipy.stats import spearmanr
 
 
-CSV_FILE = "data/grading4.csv"
+CSV_FILE = "data/BC_grading_a2_final.csv"
 
 
 def get_data_from_csv():
@@ -22,15 +22,9 @@ def get_data_from_csv():
 data = get_data_from_csv()
 dataT = np.transpose(data)
 
+# calculate spearman's correlation
 for i in range(2, len(dataT)):
     for j in range(i, len(dataT)):
         if i != j:
             corr, _ = spearmanr(dataT[i], dataT[j])
             print(i, j, corr)
-
-#print(data)
-
-# calculate spearman's correlation
-#corr, _ = spearmanr(data1, data2)
-
-#print('Spearmans correlation: %.3f' % corr)

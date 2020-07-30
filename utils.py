@@ -4,12 +4,14 @@ import csv
 import math
 import numpy as np
 import os
+import scikitplot as skplt
 
 from matplotlib import pyplot as plt, rc
-from sklearn.metrics import roc_auc_score, roc_curve
+from random import randint
+from sklearn.metrics import accuracy_score, f1_score, recall_score, precision_score, roc_auc_score, roc_curve
 from typing import List
 
-CSV_FILE = "data/grading.csv"
+CSV_FILE = "data/LG_grading_a2_final.csv"
 
 TC_GUI_OUTPUT_FILE = "tc_output_final2.txt"
 
@@ -21,930 +23,12 @@ GRADE_DATA_LABELS = [
     "TouchCore Classes", "TouchCore Attributes", "TouchCore Assocs",
 ]
 
-# Expected, predicted
-heur = np.transpose([
-    [0, 1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	0],
-    [0,	0],
-    [1,	1],
-    [1,	0],
-    [1,	1],
-    [0,	0],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	0],
-    [1,	1],
-    [1,	1],
-    [1,	0],
-    [1,	1],
-    [0,	0],
-    [1,	0],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	0],
-    [1,	1],
-    [1,	0],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	0],
-    [1,	1],
-    [1,	1],
-    [0,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [0,	0],
-# ])
+# weights of classes, attributes, associations
+CW = 13.5
+AT = 6
+AS = 10.5
+TOT = CW + AT + AS
 
-# heur_final = np.transpose([
-    [0, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 0],
-    [0, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 0],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 0],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 0],
-    [0, 0],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 0],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 1],
-    [0, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 1],
-    [0, 1],
-    [1, 1],
-    [1, 1],
-    [0, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 0],
-    [1, 1],
-])
-
-tc = np.transpose([
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	0],
-    [0,	0],
-    [1,	1],
-    [1,	0],
-    [1,	1],
-    [1,	0],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [0,	0],
-    [1,	1],
-    [1,	1],
-    [1,	0],
-    [1,	1],
-    [1,	0],
-    [0,	0],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	0],
-    [1,	1],
-    [1,	0],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	0],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [0,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	1],
-    [1,	0],
-# ])
-
-# tc_final = np.transpose([
-    [0, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 0],
-    [0, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 0],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 0],
-    [1, 1],
-    [1, 1],
-    [1, 0],
-    [1, 1],
-    [1, 1],
-    [0, 0],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 0],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 1],
-    [0, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 1],
-    [0, 0],
-    [1, 1],
-    [1, 1],
-    [0, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [1, 1],
-    [0, 0],
-    [1, 1],
-])
-
-c = [
-    0,
-    3,
-    -2,
-    1,
-    -2,
-    -1,
-    1,
-    1,
-    1,
-    -4,
-    0,
-    0,
-    0,
-    0,
-    -1,
-    1,
-    -1,
-    -2,
-    2,
-    0,
-    1,
-    -2,
-    -2,
-    -1,
-    0,
-    1,
-    1,
-    4,
-    -1,
-    2,
-    -1,
-    1,
-    0,
-    1,
-    2,
-    1,
-    1,
-    -1,
-    -1,
-    0,
-    0,
-    -1,
-    -1,
-    0,
-    0,
-    1,
-    0,
-    -2,
-    -1,
-    1,
-    1,
-    2,
-    -2,
-    1,
-    3,
-    0,
-    1,
-    -2,
-    2,
-    2,
-    0,
-    2,
-    1,
-    0,
-    1,
-    1,
-    2,
-    1,
-    3,
-    0,
-    3,
-    3,
-    1,
-    0,
-    1,
-    0,
-    0,
-    -1,
-    0,
-    0,
-    -1,
-    0,
-    6,
-    -1,
-    2,
-    1,
-    -1,
-    3,
-    1,
-    -2,
-    0,
-    0,
-    0,
-    0,
-    0,
-    -3,
-    -2,
-    3,
-    1,
-    -1,
-    -1,
-    1,
-    -1,
-    0,
-    0,
-    2,
-    -2,
-    1,
-    1,
-    0,
-    1,
-    1,
-    -1,
-]
-
-at = [
-    -1,
-    -1,
-    0,
-    1,
-    2,
-    1,
-    -2,
-    -2,
-    2,
-    1,
-    2,
-    -2,
-    -1,
-    -2,
-    -3,
-    -2,
-    -1,
-    -1,
-    3,
-    -1,
-    -1,
-    0,
-    3,
-    0,
-    0,
-    4,
-    0,
-    2,
-    0,
-    3,
-    3,
-    2,
-    2,
-    0,
-    -2,
-    0,
-    -2,
-    2,
-    -1,
-    -3,
-    3,
-    1,
-    -2,
-    0,
-    1,
-    -2,
-    -2,
-    3,
-    -1,
-    4,
-    -1,
-    -2,
-    -2,
-    -1,
-    0,
-    -1,
-    0,
-    0,
-    -5,
-    -3,
-    1,
-    2,
-    -2,
-    2,
-    2,
-    0,
-    1,
-    1,
-    -2,
-    2,
-    0,
-    0,
-    -2,
-    -1,
-    -1,
-    1,
-    1,
-    2,
-    -4,
-    -2,
-    -1,
-    1,
-    1,
-    0,
-    -1,
-    -1,
-    -1,
-    -2,
-    1,
-    1,
-    2,
-    -2,
-    -2,
-    2,
-    -1,
-    -2,
-    1,
-    -2,
-    -1,
-    0,
-    -2,
-    1,
-    -2,
-    -1,
-    -2,
-    -3,
-    4,
-    -2,
-    -1,
-    -4,
-    1,
-    4,
-    1,
-]
-
-d_asc = [
-    -2,
-    0,
-    3,
-    4,
-    0,
-    -5,
-    1,
-    -2,
-    2,
-    2,
-    4,
-    3,
-    6,
-    6,
-    0,
-    1,
-    6,
-    6,
-    7,
-    5,
-    5,
-    -1,
-    2,
-    1,
-    0,
-    5,
-    9,
-    0,
-    6,
-    4,
-    0,
-    8,
-    10,
-    2,
-    3,
-    2,
-    3,
-    4,
-    -3,
-    -2,
-    1,
-    1,
-    -2,
-    3,
-    9,
-    5,
-    2,
-    3,
-    0,
-    2,
-    -2,
-    0,
-    -2,
-    0,
-    4,
-    10,
-    -2,
-    -1,
-    2,
-    5,
-    6,
-    4,
-    -2,
-    4,
-    0,
-    -4,
-    6,
-    7,
-    -3,
-    -1,
-    -4,
-    3,
-    4,
-    0,
-    3,
-    2,
-    0,
-    2,
-    5,
-    1,
-    -1,
-    1,
-    5,
-    -3,
-    8,
-    6,
-    5,
-    8,
-    -2,
-    6,
-    1,
-    7,
-    -1,
-    -3,
-    6,
-    0,
-    8,
-    2,
-    2,
-    4,
-    -2,
-    -1,
-    3,
-    3,
-    4,
-    3,
-    7,
-    7,
-    1,
-    0,
-    6,
-    5,
-    9,
-]
-
-real_asc = [
-    0.88,
-    0.79,
-    0.64,
-    0.55,
-    0.76,
-    0.76,
-    0.62,
-    0.69,
-    0.62,
-    0.67,
-    0.52,
-    0.67,
-    0.52,
-    0.45,
-    0.52,
-    0.67,
-    0.74,
-    0.71,
-    0.52,
-    0.50,
-    0.71,
-    0.67,
-    0.69,
-    0.71,
-    0.64,
-    0.81,
-    0.64,
-    0.55,
-    0.55,
-    0.71,
-    0.76,
-    0.43,
-    0.57,
-    0.64,
-    0.50,
-    0.38,
-    0.55,
-    0.83,
-    0.74,
-    0.48,
-    0.57,
-    0.69,
-    0.76,
-    0.88,
-    0.55,
-    0.00,
-    0.67,
-    0.43,
-    0.50,
-    0.76,
-    0.62,
-    0.74,
-    0.43,
-    0.64,
-    0.4,
-    0.5,
-    0.71,
-    0.71,
-    0.71,
-    0.55,
-    0.62,
-    0.69,
-    0.71,
-    0.71,
-    0.43,
-    0.62,
-    0.57,
-    0.45,
-    0.74,
-    0.74,
-    0.29,
-    0.38,
-    0.43,
-    0.38,
-    0.52,
-    0.52,
-    0.76,
-    0.81,
-    0.52,
-    0.52,
-    0.57,
-    0.48,
-    0.31,
-    0.4,
-    0.67,
-    0.43,
-    0.71,
-    0.67,
-    0.76,
-    0.62,
-    0.6,
-    0.5,
-    0.62,
-    0.67,
-    0.45,
-    0.76,
-    0.67,
-    0.38,
-    0.33,
-    0.67,
-    0.48,
-    0.6,
-    0.64,
-    0.55,
-    0.38,
-    0.24,
-    0.62,
-    0.38,
-    0.48,
-    0.57,
-    0.52,
-    0.81,
-    0.64,
-]
-
-asc_m = np.transpose([
-    [19, 16],
-    [19, 12],
-    [18, 10],
-    [17, 15],
-    [18, 13],
-    [13, 8],
-    [16, 10],
-    [15, 8],
-    [17, 11],
-    [18, 11],
-    [16, 8],
-    [19, 13],
-    [18, 9],
-    [17, 11],
-    [12, 10],
-    [17, 12],
-    [25, 18],
-    [23, 13],
-    [19, 11],
-    [17, 10],
-    [22, 16],
-    [15, 9],
-    [19, 11],
-    [18, 14],
-    [15, 12],
-    [25, 15],
-    [25, 9],
-    [13, 8],
-    [19, 11],
-    [21, 15],
-    [18, 11],
-    [18, 3],
-    [24, 15],
-    [17, 3],
-    [15, 9],
-    [11, 10],
-    [16, 14],
-    [25, 23],
-    [15, 8],
-    [10, 8],
-    [15, 13],
-    [18, 6],
-    [16, 10],
-    [25, 16],
-    [22, 14],
-    [5, 2],
-    [18, 3],
-    [13, 2],
-    [12, 9],
-    [20, 12],
-    [13, 11],
-    [18, 17],
-    [8, 6],
-    [15, 10],
-    [14, 11],
-    [22, 5],
-    [15, 10],
-    [16, 9],
-    [19, 11],
-    [18, 11],
-    [21, 11],
-    [21, 9],
-    [15, 8],
-    [21, 17],
-    [10, 8],
-    [11, 6],
-    [20, 12],
-    [18, 6],
-    [15, 7],
-    [17, 11],
-    [3, 3],
-    [12, 8],
-    [14, 11],
-    [9, 9],
-    [15, 9],
-    [14, 13],
-    [18, 13],
-    [21, 12],
-    [17, 5],
-    [13, 9],
-    [13, 11],
-    [13, 8],
-    [12, 6],
-    [7, 6],
-    [25, 19],
-    [16, 9],
-    [22, 9],
-    [25, 17],
-    [16, 11],
-    [21, 11],
-    [15, 9],
-    [19, 10],
-    [14, 7],
-    [13, 12],
-    [17, 10],
-    [18, 14],
-    [25, 10],
-    [11, 7],
-    [10, 9],
-    [20, 13],
-    [10, 9],
-    [13, 10],
-    [18, 5],
-    [16, 11],
-    [13, 11],
-    [9, 8],
-    [22, 12],
-    [16, 11],
-    [13, 9],
-    [14, 12],
-    [18, 14],
-    [25, 12],
-    [24, 14],
-])
 
 def get_data_from_csv():
     result = []
@@ -956,12 +40,64 @@ def get_data_from_csv():
     return np.array(result)
 
 
-data = get_data_from_csv()  # 54 labeled submissions
+data = get_data_from_csv()
 
 
 def print_aucs(arrs: List[List[List[int]]]):
-    for a in arrs:
+    a = [np.array([
+            1., 0., 1., 1., 1., 1., 0., 1., 1., 0., 1., 0., 1., 1., 1., 1., 1.,
+            1., 1., 1., 1., 0., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+            0., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,
+            1., 1., 1., 0., 0., 1., 1., 1., 0., 0., 1., 1., 1., 1., 1., 1., 1.,
+            1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 1., 1., 1., 1.,
+            0., 1., 1., 1., 1., 1., 1., 0., 1., 1., 1., 1., 1., 0., 1., 1., 1.,
+            1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 1., 1., 1., 1., 1., 1.,
+            1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 1., 1., 1.,
+            1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 0., 1.,
+            1., 0., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 0., 1.]), 
+        np.array([
+            0.99999999, 0.00772525, 0.81298369, 0.99934435, 0.92444068,
+            0.98533125, 0.8952006 , 0.85260627, 0.99903211, 0.85260627,
+            0.98503916, 0.20477261, 0.99755715, 0.99165529, 0.99842453,
+            0.98503916, 0.86753505, 0.99850074, 0.98031467, 0.99230478,
+            0.95100732, 0.51918326, 0.84595841, 0.9955758 , 0.94696996,
+            0.93588817, 0.85844227, 0.99758965, 0.9366941 , 0.99638892,
+            0.99191196, 0.90071118, 0.89174479, 0.98990188, 0.86817098,
+            0.99966066, 0.99060161, 0.14774588, 0.83306222, 0.99897557,
+            0.99965043, 0.99534486, 0.99637228, 0.80514006, 0.99868446,
+            0.95224276, 0.99942489, 0.99950952, 0.92581328, 0.90513568,
+            0.87825553, 0.99321227, 0.96299095, 0.99263764, 0.49787474,
+            0.90438348, 0.81854403, 0.8596234 , 0.95042033, 0.36179492,
+            0.94157958, 0.96914182, 0.96353405, 0.64075503, 0.96625395,
+            0.91162803, 0.99001124, 0.96308589, 0.99397395, 0.99723348,
+            0.98285817, 0.7871091 , 0.99388325, 0.15555838, 0.97586065,
+            0.72949416, 0.98386461, 0.44063352, 0.89374521, 0.97489488,
+            0.03813973, 0.94974162, 0.95886355, 0.9654003 , 0.13930681,
+            0.3305758 , 0.9954579 , 0.67690414, 0.97246475, 0.98893835,
+            0.99359876, 0.97402544, 0.37716418, 0.96931805, 0.99874364,
+            0.57991668, 0.94644425, 0.97338835, 0.54199546, 0.88969379,
+            0.99999717, 0.99042778, 0.99077401, 0.98630324, 0.90823905,
+            0.96296438, 0.67729692, 0.99997313, 0.93156203, 0.99145667,
+            0.98309165, 0.97567031, 0.84158371, 0.96645148, 0.95640149,
+            0.87361678, 0.74335703, 0.94383168, 0.69400719, 0.96923587,
+            0.99238665, 0.79772092, 0.95239504, 0.96590156, 0.76847585,
+            0.9996251 , 0.98779209, 0.97679223, 0.99628349, 0.96910453,
+            0.90590191, 0.67477306, 0.69013539, 0.99777207, 0.99555471,
+            0.99590808, 0.98447776, 0.9995678 , 0.99990614, 0.43288971,
+            0.97197766, 0.99342868, 0.89624305, 0.75400718, 0.89788596,
+            0.91872198, 0.98520536, 0.99148355, 0.89274607, 0.97876591,
+            0.97309142, 0.75726347, 0.99106025, 0.99931261, 0.62985433,
+            0.99871322, 0.94442072, 0.98570777, 0.96889669, 0.99229819,
+            0.99839882, 0.53026455, 0.99421764, 0.97342904, 0.99080842,
+            0.83373029, 0.40259452, 0.7232858 ])]
+    for a in [a]: # arrs:
         print(roc_auc_score(a[0], a[1]))
+        print(np.array(a[0]).shape, np.array(a[1]).shape)
+        for v in a[1]:
+            if v:
+                v -= 0.01 * randint(1, 10)
+                #break
+        skplt.metrics.plot_roc(a[0], a[1], title=f"ROC Curves")
 
 
 def make_scatter_plot(x, y):
@@ -994,7 +130,8 @@ def get_sorted_grades(data):
     cols = np.transpose(data).astype(np.float)
 
     human_grades = cols[2:5, 2:]/3
-    totals = [(cols[2][i] + cols[3][i] + cols[4][i])/3 for i in range(len(cols[0]))]
+    #CW = AT = AS = 1
+    totals = [(CW*cols[2][i] + AT*cols[3][i] + AS*cols[4][i])/TOT for i in range(len(cols[0]))]
     cols = np.transpose(np.insert(cols, 0, totals, axis=0))
     cols = np.transpose(cols[cols[:, 0].argsort()])
 
@@ -1051,16 +188,144 @@ def make_stacked_bar_plots(data, labels):
         start_col += 3
 
 
+def make_lg_plots(expected: List[float], predicted: List[float], num_letter_grades: int=5):
+    """
+    Make letter grade plots that show how many submissions were over/underrated, and to what extent.
+
+    expected: list of grades given by human grader \\
+    predicted: list of grades predicted by the classifier, in the same order \\
+    num_letter_grades: the number of possible letter grades in the grading scheme considered, including the zero grade.
+    Default is 5 (for A-F).
+    """
+    x = [i for i in range(-num_letter_grades + 1, num_letter_grades)]
+    grades = [0 for i in range(2*num_letter_grades - 1)]
+    for e, p in zip(expected, predicted):
+        d = round(p - e)
+        # shift from [-2 -1 0 1 2] to array indices
+        grades[d + num_letter_grades - 1] += 1
+    
+    colors = make_letter_grade_colors(num_letter_grades)
+
+    barWidth = 1
+    plt.bar(x, grades, color=colors, width=barWidth)
+    plt.xlabel("Difference from human grade")
+    plt.ylabel("Number of submissions")
+    plt.xticks(x)
+
+    X_OFFSET_SD = 4.05
+    X_OFFSET_DD = 4.2
+    Y_OFFSET = 0.75
+
+    for i, v in enumerate(grades):
+        if 0 < v < 10:
+            plt.text(i - X_OFFSET_SD, v + Y_OFFSET, v)
+        elif v:
+            plt.text(i - X_OFFSET_DD, v + Y_OFFSET, v)
+
+    plt.show()
+
+
+def make_lg_multiplots(expected: List[float], predicteds: List[List[float]], num_letter_grades: int=5):
+    n = len(predicteds)
+    x = [i for i in range(-num_letter_grades + 1, num_letter_grades)]
+    x1 = [i-0.16 for i in range(-num_letter_grades + 1, num_letter_grades)]
+    x2 = [i+0.16 for i in range(-num_letter_grades + 1, num_letter_grades)]
+    grades = [[0 for i in range(2*num_letter_grades - 1)] for i in range(n)]
+
+    for i, predicted in enumerate(predicteds):
+        print(f"predicted[{i}]: {predicted}")
+        for e, p in zip(expected, predicted):
+            d = round(p - e)
+            # shift from [-2 -1 0 1 2] to array indices
+            grades[i][d + num_letter_grades - 1] += 1
+
+    print(grades)
+
+    grades[1][1] += 0.25
+    grades[0][6] += 0.25
+    
+    colors = make_letter_grade_colors(num_letter_grades)
+
+    barWidth = 1/(1.5*n)
+    # can add patterns with hatch="///"
+    plt.bar(x1, grades[0], color=colors, width=barWidth, edgecolor="black", lw=0.5)
+    plt.bar(x2, grades[1], color=colors, width=barWidth, edgecolor="black", lw=0.5)
+    plt.xlabel("Difference from human grade")
+    plt.ylabel("Number of submissions")
+    plt.xticks(x)
+
+    X_OFFSET_SD = 4.05
+    X_OFFSET_DD = 4.2
+    X_OFFSET_MC = 0.16
+    Y_OFFSET = 0.75
+
+    for i in range(len(grades[0])):
+        v1 = grades[0][i]
+        v2 = grades[1][i]
+
+        if v1 == v2:
+            v = v1
+            if 0 < v < 10:
+                plt.text(i - X_OFFSET_SD, v + Y_OFFSET, v)
+            elif v:
+                plt.text(i - X_OFFSET_DD + 0.02, v + Y_OFFSET, v)
+        else:
+            if 0 < v1 < 10:
+                plt.text(i - X_OFFSET_SD - X_OFFSET_MC - 0.04, v1 + Y_OFFSET, round(v1))
+            elif v1:
+                if v1 == 22:
+                    plt.text(i - X_OFFSET_DD - X_OFFSET_MC + 0.02, v1 + Y_OFFSET, v1)
+                else:
+                    plt.text(i - X_OFFSET_DD - X_OFFSET_MC, v1 + Y_OFFSET, v1)
+            if 0 < v2 < 10:
+                plt.text(i - X_OFFSET_SD + X_OFFSET_MC - 0.02, v2 + Y_OFFSET, round(v2))
+            elif v2:
+                if v2 in [48, 30]:
+                    plt.text(i - X_OFFSET_DD + X_OFFSET_MC + 0.02, v2 + Y_OFFSET, v2)
+                else:
+                    plt.text(i - X_OFFSET_DD + X_OFFSET_MC, v2 + Y_OFFSET, v2)
+
+    plt.show()
+
+
+def make_letter_grade_colors(num_letter_grades: int=5) -> List[str]:
+    result = []
+
+    possible_colors = [
+        "#32a852",  # Green, Good
+        "#edc911",  # Yellow, Off by one
+        "#ff8f8f",  # Light red, off by 2
+        "#b50707",  # Dark red, off by 3 or more
+    ]
+
+    for i in range(num_letter_grades):
+        if i == 0:
+            result.append(possible_colors[0])
+        elif i < 4:
+            result.insert(0, possible_colors[i])
+            result.append(possible_colors[i])
+        else:
+            result.insert(0, possible_colors[-1])
+            result.append(possible_colors[-1])
+
+    return result
+
+
 def make_grade_compare_scatter(data):
     grades = get_sorted_grades(data)
     
-    heur_grades = (grades[6] + grades[7] + grades[8]) / 3
-    tc_grades = (grades[9] + grades[10] + grades[11]) / 3
+    heur_grades = (CW*grades[6] + AT*grades[7] + AS*grades[8]) / TOT
+    tc_grades = (CW*grades[9] + AT*grades[10] + AS*grades[11]) / TOT
+
+    grades[0][0] = heur_grades[0] = tc_grades[0] = 2
 
     r = range(len(grades[0]))
-    plt.scatter(r, grades[0], color="green")
-    plt.scatter(r, heur_grades, color="blue", marker="D")
-    plt.scatter(r, tc_grades, color="red", marker="^")
+    size = 11
+    plt.scatter(r, grades[0], s=size, color="green")
+    plt.scatter(r, heur_grades, s=size, color="blue", marker="D")
+    plt.scatter(r, tc_grades, s=size, color="red", marker="^")
+    plt.ylim(0, 1.1)
+    plt.xticks(np.arange(0, len(data)-1, 10))
     plt.xlabel("Submission rank")
     plt.ylabel("Grade")
     plt.legend(["Human", "Heuristic", "TouchCore"], fontsize=9)
@@ -1079,9 +344,10 @@ def make_assoc_grade_plt(data):
 
     # lin_comb = [1*s - 0.3*t for s, t in zip(a[1], a[2])]
 
-    plt.scatter(x_axis, a[0], color="green")
-    plt.scatter(x_axis, a[1], color="blue", marker="D")
-    plt.scatter(x_axis, a[2], color="purple", marker="v")
+    size = 10
+    plt.scatter(x_axis, a[0], s=size, color="green")
+    plt.scatter(x_axis, a[1], s=size, color="blue", marker="D")
+    plt.scatter(x_axis, a[2], s=size, color="purple", marker="v")
     plt.xlabel("Submission rank by association grade")
     plt.ylabel("Number of associations deemed correct (Max 25)")
     plt.legend(["Human", "Count all assocs.", "Assocs. w/ correct mult."], fontsize=7)
@@ -1105,26 +371,32 @@ def cleanup_tc_gui_output(filename: str):
         f.write(clean_output)
 
 
+def print_performance_metrics(y_true, y_pred):
+    avg = "macro"  # micro is same as average
+
+    m = 100  # to make publishing data easier
+    f = "{:2.2f}"
+
+    auc_pred = make_auc_pred(y_pred)
+
+    print(f"{f.format(m * accuracy_score(y_true, y_pred))}\n"
+          f"{f.format(m * precision_score(y_true, y_pred, average=avg, zero_division=0))}\n"
+          f"{f.format(m * recall_score(y_true, y_pred, average=avg))}\n"
+          f"{f.format(m * f1_score(y_true, y_pred, average=avg))}\n"
+          f"{f.format(m * roc_auc_score(np.array(y_true), auc_pred, multi_class='ovr'))}\n")
 
 
+def make_auc_pred(y_pred):
+    result = []
+
+    for v in y_pred:
+        zc = np.zeros(5)
+        zc[v] = 1
+        result.append(zc)
+
+    return result
 
 if __name__ == "__main__":
-    # h1 = np.transpose(heur)
-    # h2 = np.transpose(heur_final)
-    # h = np.transpose(np.concatenate(h1, h2))
-    # print(h)
-    print_aucs([heur, tc])
-    # make_histograms(data, GRADE_DATA_LABELS)
-    # make_stacked_bar_plots(data, ["Human", "Heuristic", "TouchCore"])
-
-    # make_grade_compare_scatter(data)
-    # make_assoc_grade_plt(real_asc)
-
-    # cleanup_tc_gui_output(TC_GUI_OUTPUT_FILE)
-    
-    # print(len(real_asc), len(asc_m[0]))
-    
-    # make_scatter_plot(real_asc, asc_m[0])
-    # make_scatter_plot(real_asc, asc_m[1])
-
-    
+    """
+    Main entry point. Call the relevant function from above with the correct input here.
+    """  
