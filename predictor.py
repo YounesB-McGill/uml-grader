@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import scikitplot as skplt
+import sys
 
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
@@ -18,21 +19,21 @@ from sklearn.tree import DecisionTreeClassifier
 from typing import List
 
 
-BINARY_CLASSIFY = False
+BINARY_CLASSIFY = "-LG" not in sys.argv
 
 if BINARY_CLASSIFY:
-    CSV_FILE = "data/grading4.csv"
+    CSV_FILE = "data/BC_grading_a2_final.csv"
     LABELS = [0, 1]
+    AUC_OUTPUT_LOC = "figures/auc_BC/"
 else:
     CSV_FILE = "data/LG_grading_a2_final.csv"
     LABELS = [0, 1, 2, 3, 4]  # represent letter grades
-
-AUC_OUTPUT_LOC = "figures/auc_final/"
+    AUC_OUTPUT_LOC = "figures/auc_LG/"
 
 K = 10  # The 'k' for k-fold cross validation
 
 classifiers = [
-    LogisticRegression(C=1e5, max_iter=10000),
+    LogisticRegression(C=1e5, max_iter=2000),
     GaussianNB(var_smoothing=0.1),
     RandomForestClassifier(),
     # Also gives same results for 3, 5, 7, 12
@@ -46,6 +47,7 @@ predicted = []
 output = {}
 probas = {}
 
+aucs = {}
 
 def get_data_from_csv():
     result = []
@@ -170,8 +172,10 @@ def k_fold():
         # use data[train] and data[test] to access the data rows. Both are full rows.
         evaluate_all(data[train], data[test])
 
-
+sss = []
 def print_results():
+    global aucs
+    global sss
     cols: List[str] = ["Expected"]
     # expected is always the same
     exp = output[type(classifiers[0]).__name__]["heuristic"]["expected"]
@@ -198,13 +202,22 @@ def print_results():
             n = f"{model_name}_{data_name}"
             pred = np.array(probas[model_name][data_name])
 
+            pred_ = pred
             if BINARY_CLASSIFY:
-                pred = np.transpose(pred)[1]
+                pred_ = np.transpose(pred)[1]
 
-            auc = roc_auc_score(np.array(exp), pred, multi_class='ovr')
+            auc = roc_auc_score(np.array(exp), pred_, multi_class='ovr')
+            if n == "LogisticRegression_heuristic":
+                sss.append(np.array(exp))
+                sss.append(pred)
+                print(np.array(exp).shape, pred.shape)
+            aucs[n] = auc
             #print(f"AUC of {n}: {auc}")
             print(make_confusion_matrix(n, exp, output[model_name][data_name]["predicted"], auc, LABELS), "\n")
-            #save_auc(n, exp, pred)
+            # print(n, type(exp), type(pred))
+            # print(n, len(exp), pred.shape)
+            # exit()
+            save_auc(n, exp, pred)
 
     # 0 LogisticRegression(C=1e5, max_iter=2000),
     # 1 GaussianNB(var_smoothing=0.1),
@@ -223,10 +236,10 @@ def print_importances():
 
 def save_auc(name, expected, predicted):
     skplt.metrics.plot_roc(expected, predicted, title=f"{name.replace('_', ' ')} ROC Curves")
-    plt.savefig(os.path.join(AUC_OUTPUT_LOC, f"{name}.png"), format="png")
+    plt.savefig(os.path.join(AUC_OUTPUT_LOC, f"{name}.pdf"), format="pdf")
 
 
-def make_confusion_matrix(n, y_true, y_pred, auc, labels):
+def make_confusion_matrix(name, y_true, y_pred, auc, labels):
     labels = [*labels, 0]
     cm = np.array(confusion_matrix(y_true, y_pred))
 
@@ -236,7 +249,7 @@ def make_confusion_matrix(n, y_true, y_pred, auc, labels):
     cm = np.r_[[labels], cm]
     cm = np.c_[[0, *labels], cm]
 
-    result = n + "\n"
+    result = name + "\n"
     for row in cm:
         result += f"{','.join(list(map(str, row)))}\n"
 
@@ -273,4 +286,12 @@ def debug():
 if __name__ == "__main__":
     k_fold()
     print_results()
-    print_importances()
+    #print_importances()
+    max_auc = 0
+    for k, v in aucs.items():
+        if v > max_auc:
+            max_auc = v
+        print(f"{'{:2.2f}'.format(100*v)} {k}")
+    
+    print(f"Best AUC: {'{:2.2f}'.format(100*max_auc)}")
+    #print(sss)
