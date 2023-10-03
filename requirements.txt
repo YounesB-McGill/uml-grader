@@ -17,7 +17,7 @@ openpyxl==3.0.3
 pandas==1.0.3
 patool==1.12
 patsy==0.5.1
-Pillow==7.1.2
+Pillow==10.0.1
 PyAutoGUI==0.9.50
 PyGetWindow==0.0.8
 PyMsgBox==1.0.8
